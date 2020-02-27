@@ -1,0 +1,3 @@
+#Android_Project 폴더에 프로젝트 파일이 들어가요.
+
+#Resources 폴더에는 이미지나 동영상, 음악 등등.
