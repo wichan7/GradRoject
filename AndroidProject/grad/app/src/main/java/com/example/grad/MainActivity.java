@@ -11,7 +11,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btn_gotoSelect;
     // activity_main.xml의 btn_gotoSelect와 연결할 객체 선언.
-    //
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SelectActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

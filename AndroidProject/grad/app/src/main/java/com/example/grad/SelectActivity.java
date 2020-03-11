@@ -1,6 +1,8 @@
 package com.example.grad;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -9,20 +11,43 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class SelectActivity extends AppCompatActivity implements OnMapReadyCallback {
-//OnMapReadyCallback 인터페이스 구현
+import android.view.View;
+import android.widget.Button;
 
+public class SelectActivity extends AppCompatActivity implements OnMapReadyCallback { //OnMapReadyCallback 인터페이스 구현
     private GoogleMap mMap;
+
+    private Button btn_PassengerLogin;
+    private Button btn_DriverLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        // selectActivity.xml에 있는 fragment의 id를 통해 mapFragment를 찾아 연결
-        mapFragment.getMapAsync(this);
-        // getMapAsync가 호출되면 onMapReady 콜백이 실행됨.
+        ////Buttons////
+        btn_PassengerLogin = findViewById(R.id.btn_PassengerLogin);
+        btn_PassengerLogin.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SelectActivity.this, PassengerLoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        btn_DriverLogin = findViewById(R.id.btn_DriverLogin);
+        btn_DriverLogin.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SelectActivity.this, PassengerLoginActivity.class); // DriverActivity 만들고 수정해야함.
+                startActivity(intent);
+            }
+        });
+        ////End Buttons////
+
+        ////Google Map////
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map); // selectActivity.xml에 있는 fragment의 id를 통해 mapFragment를 찾아 연결
+        mapFragment.getMapAsync(this); // getMapAsync가 호출되면 onMapReady 콜백이 실행됨.
+        ////End Google Map////
     }
 
     public void onMapReady(final GoogleMap googleMap){ // null이아닌 googlemap객체를 제공해줄 수 있을때 호출되는 함수

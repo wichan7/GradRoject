@@ -1,3 +1,8 @@
 #Android_Project 폴더에 프로젝트 파일이 들어가요.
-
 #Resources 폴더에는 이미지나 동영상, 음악 등등.
+
+*폰트 추가법: https://lktprogrammer.tistory.com/191
+*레이아웃 팁: https://yoo-hyeok.tistory.com/56
+*레이아웃 팁2: https://m.blog.naver.com/snowheeee/220957372047
+
+*웹 호스팅: https://gyuhyeonlee.tistory.com/19?category=825446

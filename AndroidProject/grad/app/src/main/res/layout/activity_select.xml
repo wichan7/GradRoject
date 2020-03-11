@@ -8,13 +8,13 @@
     tools:context=".SelectActivity">
 
     <Button
-        android:id="@+id/btn_userLogin"
+        android:id="@+id/btn_PassengerLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="승객 로그인" />
 
     <Button
-        android:id="@+id/btn_driverLogin"
+        android:id="@+id/btn_DriverLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="기사 로그인" />

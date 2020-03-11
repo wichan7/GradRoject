@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SelectActivity"></activity>
-        <!-- Google map API 사용을 위한 코드 -->
+        <activity android:name=".PassengerLoginActivity"></activity>
+        <activity android:name=".SelectActivity" /> <!-- Google map API 사용을 위한 코드 -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBMWOaafJ_sqHCTUAbMP6pSx708LssT-aY" /> <!--  -->
