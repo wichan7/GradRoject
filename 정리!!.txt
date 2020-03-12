@@ -1,6 +1,10 @@
 #Android_Project 폴더에 프로젝트 파일이 들어가요.
 #Resources 폴더에는 이미지나 동영상, 음악 등등.
 
+@@Android Studio 설치 후 프로젝트 연결했더니 gradle 에러뜰때@@
+  1. 파일 경로에 한글이 없어야함.
+  2. Android Studio 켜고 상단의 Tools - SDK Manager 에서 파이(API버전 28) 체크 후 Apply 및 자동설치
+
 *폰트 추가법: https://lktprogrammer.tistory.com/191
 *레이아웃 팁: https://yoo-hyeok.tistory.com/56
 *레이아웃 팁2: https://m.blog.naver.com/snowheeee/220957372047
