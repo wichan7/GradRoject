@@ -10,3 +10,4 @@
 *레이아웃 팁2: https://m.blog.naver.com/snowheeee/220957372047
 
 *웹 호스팅: https://gyuhyeonlee.tistory.com/19?category=825446
+*안드로이드 jsp mysql 연동: http://blog.naver.com/rain483/220814116681
