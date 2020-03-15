@@ -1,0 +1,7 @@
+TortoiseGit 2.9.0.0
+Android Studio 3.5.3, sdk-pie
+
+Tomcat 9.0 (과제로 설치한거)
+EclipseEE (과제로 설치한거)
+
+mysql 8.0.19 https://dev.mysql.com/downloads/installer/ 용량 큰거 다운로드
