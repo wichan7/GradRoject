@@ -46,7 +46,7 @@ public class PassengerLoginActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             try {
                 String str;
-                URL url = new URL("http://172.30.1.38:8080/highquickJSPproject/DB_highquick/test.jsp");
+                URL url = new URL("http://172.30.1.36:8080/highquick/test.jsp");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                 conn.setRequestMethod("POST");

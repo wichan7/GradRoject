@@ -5,6 +5,8 @@
   1. 파일 경로에 한글이 없어야함.
   2. Android Studio 켜고 상단의 Tools - SDK Manager 에서 파이(API버전 28) 체크 후 Apply 및 자동설치
 
+*Google Map API: https://webnautes.tistory.com/647
+
 *폰트 추가법: https://lktprogrammer.tistory.com/191
 *레이아웃 팁: https://yoo-hyeok.tistory.com/56
 *레이아웃 팁2: https://m.blog.naver.com/snowheeee/220957372047
