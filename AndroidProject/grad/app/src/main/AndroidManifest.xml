@@ -12,7 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DriverLoginActivity"></activity>
+        <activity android:name=".PassengerDriverInformActivity"></activity>
+        <activity android:name=".DriverCallCheckActivity" />
+        <activity android:name=".DriverCallListActivity" />
+        <activity android:name=".PassengerCallActivity" />
+        <activity android:name=".DriverLicenseActivity" />
+        <activity android:name=".DriverSignInActivity" />
+        <activity android:name=".PassengerSignInActivity" />
+        <activity android:name=".FirstInstallActivity" />
+        <activity android:name=".DriverLoginActivity" />
         <activity android:name=".PassengerLoginActivity" />
         <activity android:name=".SelectActivity" /> <!-- Google map API 사용을 위한 코드 -->
         <meta-data

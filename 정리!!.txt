@@ -6,6 +6,7 @@
   2. Android Studio 켜고 상단의 Tools - SDK Manager 에서 파이(API버전 28) 체크 후 Apply 및 자동설치
 
 *Google Map API: https://webnautes.tistory.com/647
+   Google Map API 본인 환경에서 테스트하실분은 카톡이나 디코주세요
 
 *폰트 추가법: https://lktprogrammer.tistory.com/191
 *레이아웃 팁: https://yoo-hyeok.tistory.com/56

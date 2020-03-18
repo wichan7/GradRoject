@@ -4,4 +4,4 @@ Android Studio 3.5.3, sdk-pie
 Tomcat 9.0 (과제로 설치한거)
 EclipseEE (과제로 설치한거)
 
-mysql 8.0.19 https://dev.mysql.com/downloads/installer/ 용량 큰거 다운로드
+mysql 5.6.46 https://downloads.mysql.com/archives/community/  5.6.46버전 찾고 용량 큰거 다운로드
