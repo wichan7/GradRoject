@@ -54,7 +54,7 @@ public class PassengerLoginActivity extends AppCompatActivity {
             }
         });
          */
-    }
+    } // onCreate 끝
 
     class CustomTask extends AsyncTask<String, Void, String> {
         String sendMsg, receiveMsg;
@@ -62,8 +62,9 @@ public class PassengerLoginActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                String str;
-                URL url = new URL("http://192.168.219.100:8080/highquick/test.jsp");
+                String str, str_url;
+                str_url = "http://"+ Gloval.ip +":8080/highquick/test.jsp";
+                URL url = new URL(str_url);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                 conn.setRequestMethod("POST");
@@ -95,7 +96,7 @@ public class PassengerLoginActivity extends AppCompatActivity {
 
     View.OnClickListener btnListener = new View.OnClickListener() {
         @Override
-        public void onClick(View view) {
+        public void onClick(View view) { // View 클래스가 Button, EditText...etc들의 최상위 클래스임
             switch (view.getId()) {
                 case R.id.btn_login: // 로그인 버튼 눌렀을 경우
                     Log.i("로그","찍히냐?");
