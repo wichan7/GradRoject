@@ -106,7 +106,7 @@ public class PassengerLoginActivity extends AppCompatActivity {
                         String result = new CustomTask().execute(loginid, loginpwd, "login").get();
                         if (result.equals("true")) {
                             Toast.makeText(PassengerLoginActivity.this, "로그인", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(PassengerLoginActivity.this, MainActivity.class);
+                            Intent intent = new Intent(PassengerLoginActivity.this, PassengerCallActivity.class);
                             startActivity(intent);
                             finish();
                         } else if (result.equals("false")) {
