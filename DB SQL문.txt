@@ -1,0 +1,18 @@
+//////////////
+//calls 테이블
+//////////////
+CREATE TABLE calls(
+num int(11) unsigned auto_increment,
+calltime timestamp default NOW(),
+status int(11),
+sid varchar(20),
+gid varchar(20),
+slocLat int(11),
+slocLong int(11),
+sdestLat int(11),
+sdestLong int(11),
+smessage varchar(100),
+PRIMARY KEY (num),
+FOREIGN KEY (sid) REFERENCES passenger(id),
+FOREIGN KEY (gid) REFERENCES driver(id)
+);

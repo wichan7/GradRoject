@@ -29,7 +29,7 @@ public class PassengerLoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_login);
-        Button data = (Button) findViewById(R.id.btn_login);
+        //Button data = (Button) findViewById(R.id.btn_login);
 
         et_id = (EditText) findViewById(R.id.et_id);
         et_pwd = (EditText) findViewById(R.id.et_pwd);
@@ -99,7 +99,7 @@ public class PassengerLoginActivity extends AppCompatActivity {
         public void onClick(View view) { // View 클래스가 Button, EditText...etc들의 최상위 클래스임
             switch (view.getId()) {
                 case R.id.btn_login: // 로그인 버튼 눌렀을 경우
-                    Log.i("로그","찍히냐?");
+                    //Log.i("로그","찍히냐?");
                     String loginid = et_id.getText().toString();
                     String loginpwd = et_pwd.getText().toString();
                     try {

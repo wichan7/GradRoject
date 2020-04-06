@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         btn_gotoSelect.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SelectActivity.class);
+                Intent intent = new Intent(MainActivity.this, FirstInstallActivity.class);
                 startActivity(intent);
                 finish();
             }

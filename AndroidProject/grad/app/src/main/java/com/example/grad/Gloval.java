@@ -4,5 +4,5 @@ package com.example.grad;
  * Gloval 클래스는 static인 속성이나 메서드를 관리할 클래스입니다.
  */
 public class Gloval {
-    static final String ip = "172.30.1.34";
+    static final String ip = "172.30.1.2";
 }
