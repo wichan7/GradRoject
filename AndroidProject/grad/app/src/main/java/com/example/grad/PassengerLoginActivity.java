@@ -121,6 +121,7 @@ public class PassengerLoginActivity extends AppCompatActivity {
                     } catch (Exception e) { }
                     break;
                 case R.id.btn_signIn: // 회원가입
+                    /* 나중에 PassengerSignInActivity 작성할때 참고할 것.
                     String joinid = et_id.getText().toString();
                     String joinpwd = et_pwd.getText().toString();
                     try {
@@ -135,7 +136,10 @@ public class PassengerLoginActivity extends AppCompatActivity {
                             Toast.makeText(PassengerLoginActivity.this, "회원가입을 축하합니다.", Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e) {
-                    }
+                     */
+                    Intent intent = new Intent(PassengerLoginActivity.this, PassengerSignInActivity.class);
+                    startActivity(intent);
+                    finish();
                     break;
             }
         }
