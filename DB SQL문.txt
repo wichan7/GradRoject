@@ -1,6 +1,25 @@
-//////////////
-//calls 테이블
-//////////////
+####auto_increment 값 초기화: https://amaze9001.tistory.com/28
+
+*passenger 테이블
+CREATE TABLE passenger(
+no int(11) auto_increment PRIMARY KEY,
+id varchar(20) UNIQUE KEY,
+pwd varchar(20),
+name varchar(20),
+phone varchar(20)
+);
+
+*driver 테이블
+CREATE TABLE driver(
+no int(11) auto_increment PRIMARY KEY,
+id varchar(20) UNIQUE KEY,
+pwd varchar(20),
+name varchar(20),
+phone varchar(20),
+isOn bool default false
+);
+
+*calls 테이블
 CREATE TABLE calls(
 num int(11) unsigned auto_increment,
 calltime timestamp default NOW(),
