@@ -135,7 +135,7 @@ public class DriverLoginActivity extends AppCompatActivity {
                         }
                     } catch (Exception e) {
                      */
-                    Intent intent = new Intent(DriverLoginActivity.this, DriverSignInActivity.class);
+                    Intent intent = new Intent(DriverLoginActivity.this, DriverJoinActivity.class);
                     startActivity(intent);
                     finish();
                     break;

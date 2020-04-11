@@ -1,4 +1,4 @@
-####auto_increment 값 초기화: https://amaze9001.tistory.com/28
+#auto_increment 값 초기화하는법: https://amaze9001.tistory.com/28
 
 *passenger 테이블
 CREATE TABLE passenger(
@@ -19,19 +19,27 @@ phone varchar(20),
 isOn bool default false
 );
 
+*license 테이블
+CREATE TABLE license(
+no int(11) PRIMARY KEY,
+birth varchar(20),
+licenseCode varchar(20),
+FOREIGN KEY (no) REFERENCES driver(no)
+);
+
 *calls 테이블
 CREATE TABLE calls(
-num int(11) unsigned auto_increment,
+no int(11) unsigned auto_increment,
 calltime timestamp default NOW(),
 status int(11),
-sid varchar(20),
-gid varchar(20),
+sno int(11),
+gno int(11),
 slocLat int(11),
 slocLong int(11),
 sdestLat int(11),
 sdestLong int(11),
 smessage varchar(100),
-PRIMARY KEY (num),
-FOREIGN KEY (sid) REFERENCES passenger(id),
-FOREIGN KEY (gid) REFERENCES driver(id)
+PRIMARY KEY (no),
+FOREIGN KEY (sno) REFERENCES passenger(no),
+FOREIGN KEY (gno) REFERENCES driver(no)
 );

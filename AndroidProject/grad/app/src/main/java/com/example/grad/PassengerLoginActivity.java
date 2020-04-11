@@ -137,7 +137,7 @@ public class PassengerLoginActivity extends AppCompatActivity {
                         }
                     } catch (Exception e) {
                      */
-                    Intent intent = new Intent(PassengerLoginActivity.this, PassengerSignInActivity.class);
+                    Intent intent = new Intent(PassengerLoginActivity.this, PassengerJoinActivity.class);
                     startActivity(intent);
                     finish();
                     break;
