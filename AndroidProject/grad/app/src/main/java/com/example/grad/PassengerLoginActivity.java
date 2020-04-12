@@ -24,7 +24,7 @@ import java.net.URL;
 public class PassengerLoginActivity extends AppCompatActivity {
     EditText et_id, et_pwd;
     Button btn_login, btn_signIn;
-
+    String str_type = "passenger"; //driveractivity면 driver로 변경
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +49,6 @@ public class PassengerLoginActivity extends AppCompatActivity {
                     result = task.execute("rain483","1234").get();
                     Log.i("리턴 값",result);
                 } catch (Exception e) {
-
                 }
             }
         });
@@ -63,7 +62,7 @@ public class PassengerLoginActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             try {
                 String str, str_url;
-                str_url = "http://"+ Gloval.ip +":8080/highquick/test.jsp";
+                str_url = "http://"+ Gloval.ip +":8080/highquick/login.jsp";
                 URL url = new URL(str_url);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -103,18 +102,18 @@ public class PassengerLoginActivity extends AppCompatActivity {
                     String loginid = et_id.getText().toString();
                     String loginpwd = et_pwd.getText().toString();
                     try {
-                        String result = new CustomTask().execute(loginid, loginpwd, "login").get();
-                        if (result.equals("true")) {
-                            Toast.makeText(PassengerLoginActivity.this, "로그인", Toast.LENGTH_SHORT).show();
+                        String result = new CustomTask().execute(loginid, loginpwd, str_type).get();
+                        if (result.equals("success")) {
+                            Toast.makeText(PassengerLoginActivity.this, getString(R.string.success), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(PassengerLoginActivity.this, PassengerCallActivity.class);
                             startActivity(intent);
                             finish();
-                        } else if (result.equals("false")) {
-                            Toast.makeText(PassengerLoginActivity.this, "아이디 또는 비밀번호가 틀렸음", Toast.LENGTH_SHORT).show();
+                        } else if (result.equals("pwdNotEquals")) {
+                            Toast.makeText(PassengerLoginActivity.this, getString(R.string.pwdNotEquals), Toast.LENGTH_SHORT).show();
                             et_id.setText("");
                             et_pwd.setText("");
                         } else if (result.equals("noId")) {
-                            Toast.makeText(PassengerLoginActivity.this, "존재하지 않는 아이디", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PassengerLoginActivity.this, getString(R.string.idNoExist), Toast.LENGTH_SHORT).show();
                             et_id.setText("");
                             et_pwd.setText("");
                         }

@@ -19,10 +19,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+
+
 public class DriverLoginActivity extends AppCompatActivity {
     EditText et_id, et_pwd;
     Button btn_login, btn_signIn;
-
+    String str_type = "driver"; //driveractivity면 driver로 변경
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +49,6 @@ public class DriverLoginActivity extends AppCompatActivity {
                     result = task.execute("rain483","1234").get();
                     Log.i("리턴 값",result);
                 } catch (Exception e) {
-
                 }
             }
         });
@@ -61,7 +62,7 @@ public class DriverLoginActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             try {
                 String str, str_url;
-                str_url = "http://"+ Gloval.ip +":8080/highquick/test.jsp";
+                str_url = "http://"+ Gloval.ip +":8080/highquick/login.jsp";
                 URL url = new URL(str_url);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -101,25 +102,27 @@ public class DriverLoginActivity extends AppCompatActivity {
                     String loginid = et_id.getText().toString();
                     String loginpwd = et_pwd.getText().toString();
                     try {
-                        String result = new DriverLoginActivity.CustomTask().execute(loginid, loginpwd, "login").get();
-                        if (result.equals("true")) {
-                            Toast.makeText(DriverLoginActivity.this, "로그인", Toast.LENGTH_SHORT).show();
+                        String result = new CustomTask().execute(loginid, loginpwd, str_type).get();
+                        if (result.equals("success")) {
+                            Toast.makeText(DriverLoginActivity.this, getString(R.string.success), Toast.LENGTH_SHORT).show();
+                            /* driver 다음 화면 만들때 주석해제
                             Intent intent = new Intent(DriverLoginActivity.this, PassengerCallActivity.class);
                             startActivity(intent);
                             finish();
-                        } else if (result.equals("false")) {
-                            Toast.makeText(DriverLoginActivity.this, "아이디 또는 비밀번호가 틀렸음", Toast.LENGTH_SHORT).show();
+                             */
+                        } else if (result.equals("pwdNotEquals")) {
+                            Toast.makeText(DriverLoginActivity.this, getString(R.string.pwdNotEquals), Toast.LENGTH_SHORT).show();
                             et_id.setText("");
                             et_pwd.setText("");
                         } else if (result.equals("noId")) {
-                            Toast.makeText(DriverLoginActivity.this, "존재하지 않는 아이디", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DriverLoginActivity.this, getString(R.string.idNoExist), Toast.LENGTH_SHORT).show();
                             et_id.setText("");
                             et_pwd.setText("");
                         }
                     } catch (Exception e) { }
                     break;
                 case R.id.btn_signIn: // 회원가입
-                    /* 나중에 DriverSignInActivity 작성할때 참고할 것.
+                    /* 나중에 PassengerSignInActivity 작성할때 참고할 것.
                     String joinid = et_id.getText().toString();
                     String joinpwd = et_pwd.getText().toString();
                     try {
