@@ -6,4 +6,51 @@
     android:layout_height="match_parent"
     tools:context=".DriverLicenseActivity">
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="380dp"
+        android:layout_height="40dp"
+        android:text="※ 면허 인증이 필요합니다."
+        android:textColor="#F80909"
+        android:textSize="30dp"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="30dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:background="#FFC107"
+        android:text="카메라"
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="421dp" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:background="#FFC107"
+        android:text="앨범"
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="245dp"
+        tools:layout_editor_absoluteY="421dp" />
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="380dp"
+        android:layout_height="60dp"
+        android:background="#FFC107"
+        android:text="제출"
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="536dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="380dp"
+        android:layout_height="270dp"
+        app:srcCompat="?attr/selectableItemBackground"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="93dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
