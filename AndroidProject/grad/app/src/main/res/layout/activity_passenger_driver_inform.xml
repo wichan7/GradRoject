@@ -100,7 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:text="1"
+        android:text="*"
         app:layout_constraintBaseline_toBaselineOf="@+id/Drivername"
         app:layout_constraintStart_toEndOf="@+id/Drivername" />
 
@@ -109,7 +109,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:text="2"
+        android:text="*"
         app:layout_constraintBaseline_toBaselineOf="@+id/Dnum"
         app:layout_constraintStart_toEndOf="@+id/Dnum" />
 
@@ -118,7 +118,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:text="3"
+        android:text="*"
         app:layout_constraintBaseline_toBaselineOf="@+id/Dphnum"
         app:layout_constraintStart_toEndOf="@+id/Dphnum" />
 
@@ -127,7 +127,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:text="4"
+        android:text="*"
         app:layout_constraintBaseline_toBaselineOf="@+id/Dtime"
         app:layout_constraintStart_toEndOf="@+id/Dtime" />
 
