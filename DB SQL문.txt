@@ -16,6 +16,8 @@ id varchar(20) UNIQUE KEY,
 pwd varchar(20),
 name varchar(20),
 phone varchar(20),
+birth varchar(20),
+licenseCode varchar(20),
 isOn bool default false
 );
 
