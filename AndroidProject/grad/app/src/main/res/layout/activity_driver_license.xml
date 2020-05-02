@@ -23,8 +23,8 @@
         android:background="#FFC107"
         android:text="카메라"
         android:textSize="20dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="421dp" />
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="558dp" />
 
     <Button
         android:id="@+id/button8"
@@ -34,7 +34,7 @@
         android:text="앨범"
         android:textSize="20dp"
         tools:layout_editor_absoluteX="245dp"
-        tools:layout_editor_absoluteY="421dp" />
+        tools:layout_editor_absoluteY="558dp" />
 
     <Button
         android:id="@+id/button9"
@@ -43,8 +43,8 @@
         android:background="#FFC107"
         android:text="제출"
         android:textSize="20dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="536dp" />
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="638dp" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -53,4 +53,35 @@
         app:srcCompat="?attr/selectableItemBackground"
         tools:layout_editor_absoluteX="15dp"
         tools:layout_editor_absoluteY="93dp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="380dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="성명"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="385dp" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="380dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="생년월일"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="446dp" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="380dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="라이선스 번호(-표시제외)"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="502dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
