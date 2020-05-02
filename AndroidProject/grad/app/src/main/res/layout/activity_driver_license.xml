@@ -10,78 +10,106 @@
         android:id="@+id/textView6"
         android:layout_width="380dp"
         android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
         android:text="※ 면허 인증이 필요합니다."
         android:textColor="#F80909"
         android:textSize="30dp"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="30dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="150dp"
         android:layout_height="60dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
         android:background="#FFC107"
         android:text="카메라"
         android:textSize="20dp"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="558dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText3" />
 
     <Button
         android:id="@+id/button8"
         android:layout_width="150dp"
         android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
         android:background="#FFC107"
         android:text="앨범"
         android:textSize="20dp"
-        tools:layout_editor_absoluteX="245dp"
-        tools:layout_editor_absoluteY="558dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText3" />
 
     <Button
         android:id="@+id/button9"
         android:layout_width="380dp"
         android:layout_height="60dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="30dp"
         android:background="#FFC107"
         android:text="제출"
         android:textSize="20dp"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="638dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="380dp"
         android:layout_height="270dp"
-        app:srcCompat="?attr/selectableItemBackground"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="93dp" />
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:srcCompat="?attr/selectableItemBackground" />
 
     <EditText
         android:id="@+id/editText"
         android:layout_width="380dp"
         android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="5dp"
         android:ems="10"
         android:hint="성명"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="385dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/editText2"
         android:layout_width="380dp"
         android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="5dp"
         android:ems="10"
         android:hint="생년월일"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="446dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
 
     <EditText
         android:id="@+id/editText3"
         android:layout_width="380dp"
         android:layout_height="40dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="5dp"
         android:ems="10"
         android:hint="라이선스 번호(-표시제외)"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="502dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
