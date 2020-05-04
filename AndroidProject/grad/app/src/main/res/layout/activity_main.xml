@@ -50,7 +50,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="로그인되어있으면 자동으로 passenger call로 넘어가지게 할 것."
+            android:text="로그인되어있으면 자동으로 passenger call이나 drivercalllist로 넘어가지게 할 것."
             android:textSize="6pt"
             android:gravity="center"/>
     </LinearLayout>

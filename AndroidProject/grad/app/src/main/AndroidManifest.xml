@@ -3,10 +3,9 @@
     package="com.example.grad">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PassengerJoinActivity"></activity>
+        <activity android:name=".ShowPassengersLocationActivity"></activity>
+        <activity android:name=".ShowDriversLocationActivity" />
+        <activity android:name=".DriverWaitingActivity" />
+        <activity android:name=".PassengerWaitingActivity" />
+        <activity android:name=".PassengerJoinActivity" />
         <activity android:name=".DriverJoinActivity" />
         <activity android:name=".PassengerDriverInformActivity" />
         <activity android:name=".DriverCallCheckActivity" />

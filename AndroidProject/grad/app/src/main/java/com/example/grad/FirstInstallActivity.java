@@ -22,6 +22,7 @@ public class FirstInstallActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(FirstInstallActivity.this, PassengerLoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         btn_DriverLogin = findViewById(R.id.btn_DriverLogin);
@@ -30,6 +31,7 @@ public class FirstInstallActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(FirstInstallActivity.this, DriverLoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

@@ -105,11 +105,9 @@ public class DriverLoginActivity extends AppCompatActivity {
                         String result = new CustomTask().execute(loginid, loginpwd, str_type).get();
                         if (result.equals("success")) {
                             Toast.makeText(DriverLoginActivity.this, getString(R.string.success), Toast.LENGTH_SHORT).show();
-                            /* driver 다음 화면 만들때 주석해제
-                            Intent intent = new Intent(DriverLoginActivity.this, PassengerCallActivity.class);
+                            Intent intent = new Intent(DriverLoginActivity.this, DriverLicenseActivity.class);
                             startActivity(intent);
                             finish();
-                             */
                         } else if (result.equals("pwdNotEquals")) {
                             Toast.makeText(DriverLoginActivity.this, getString(R.string.pwdNotEquals), Toast.LENGTH_SHORT).show();
                             et_id.setText("");

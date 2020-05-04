@@ -39,7 +39,6 @@ public class DriverJoinActivity extends AppCompatActivity {
         btn_submit = findViewById(R.id.btn_submit);
         btn_check.setOnClickListener(btnListener);
         btn_submit.setOnClickListener(btnListener);
-
     }
 
     View.OnClickListener btnListener = new View.OnClickListener() {
@@ -102,6 +101,7 @@ public class DriverJoinActivity extends AppCompatActivity {
             }
         }
     };
+
 
     class CustomTask extends AsyncTask<String, Void, String> {
         String sendMsg, receiveMsg;
