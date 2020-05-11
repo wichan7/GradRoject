@@ -40,11 +40,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(MainActivity.this, PassengerCallActivity.class);
                 startActivity(intent);
                 finish();
+                break;
 
             case R.id.btn_gotoDriverCallList:
                 intent = new Intent(MainActivity.this, DriverCallListActivity.class);
                 startActivity(intent);
                 finish();
+                break;
         }
     }
 }

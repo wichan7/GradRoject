@@ -23,6 +23,7 @@
         <activity android:name=".DriverJoinActivity" />
         <activity android:name=".PassengerDriverInformActivity" />
         <activity android:name=".DriverCallCheckActivity" />
+        <activity android:name=".DriverFeedback" />
         <activity android:name=".DriverCallListActivity" />
         <activity android:name=".PassengerCallActivity" />
         <activity android:name=".DriverLicenseActivity" />
