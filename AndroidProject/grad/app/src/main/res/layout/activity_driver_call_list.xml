@@ -18,36 +18,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_revert" />
 
-    <Button
-        android:id="@+id/btn_call1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
-        android:text="서울시 중랑구 면목동 서일대학교"
+    <ListView
+        android:layout_width="380dp"
+        android:layout_height="640dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_back" />
-
-    <Button
-        android:id="@+id/btn_call2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="서울시 중랑구 면목역"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_call1" />
-
-    <Button
-        android:id="@+id/btn_call3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="서울시 강남구 탄탄대로 302길"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_call2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
