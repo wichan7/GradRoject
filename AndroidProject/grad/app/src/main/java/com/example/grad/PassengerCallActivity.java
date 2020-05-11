@@ -101,7 +101,6 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
         //endregion
     }
 
-    private boolean isCameraUpdated = false;
     @Override
     public void onMapReady(final GoogleMap googleMap) { //googlemap이 작동완료했을때 실행되는 콜백함수
         mMap = googleMap;
@@ -150,6 +149,7 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
 
     //region GPS를 위한 코드
 
+    private boolean isCameraUpdated = false;
     LocationCallback locationCallback = new LocationCallback() { //locationCallback 객체 생성
         @Override
         public void onLocationResult(LocationResult locationResult) {
