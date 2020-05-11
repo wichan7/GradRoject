@@ -24,7 +24,8 @@
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="#FFC107"
+        android:background="@drawable/bs"
+        android:backgroundTint="#878282"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_revert" />
@@ -35,6 +36,8 @@
         android:layout_height="80dp"
         android:layout_marginTop="48dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/bs"
+        android:backgroundTint="#878282"
         android:text="수락하기"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

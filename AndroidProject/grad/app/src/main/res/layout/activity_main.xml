@@ -24,13 +24,13 @@
             android:id="@+id/btn_gotoPassengerCall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Passengercall로 이동"/>
+            android:text="Passengercall로 이동" />
 
         <Button
             android:id="@+id/btn_gotoDriverCallList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DriverCallList로 이동"/>
+            android:text="DriverCallList로 이동" />
 
     </LinearLayout>
 
