@@ -9,11 +9,13 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
@@ -40,9 +42,16 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 public class PassengerCallActivity extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap = null;
@@ -50,6 +59,7 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
     private EditText et_search = null;
     private Button btn_search = null, btn_call = null;
     private Marker destMarker = null; //목적지마커는 항상 한개로 유지되어야하므로 destMarker로 관리
+    private SharedPreferences pref;
 
     //region GPS를 위한 변수선언부
 
@@ -82,6 +92,7 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map); // selectActivity.xml에 있는 fragment의 id를 통해 mapFragment를 찾아 연결
         mapFragment.getMapAsync(this); // getMapAsync가 호출되면 onMapReady 콜백이 실행됨.
+        pref = getSharedPreferences(Gloval.PREFERENCE, MODE_PRIVATE);
 
         //region GPS를 위한 코드
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -446,14 +457,37 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
 
                     break;
                 case R.id.btn_call:
-                    /* 나중에 주석해제
                     if(destMarker==null){ //목적지마커가 없으면
                         Toast.makeText(PassengerCallActivity.this, "목적지를 설정해주세요!", Toast.LENGTH_SHORT).show();
+                        return;
                     }
-                     */
-                    Intent intent = new Intent(PassengerCallActivity.this, PassengerWaitingActivity.class);
-                    startActivity(intent);
-                    finish();
+
+                    String id = pref.getString("id","");
+                    String slocString = getCurrentAddress(currentPosition);
+                    String slocLat = Double.toString(currentPosition.latitude);
+                    String slocLong = Double.toString(currentPosition.longitude);
+                    String sdestLat = Double.toString(destMarker.getPosition().latitude);
+                    String sdestLong = Double.toString(destMarker.getPosition().longitude);
+
+                    try {
+                        String result = new CustomTask().execute(id,slocString,slocLat,slocLong,sdestLat,sdestLong).get();
+                        if(result.equals("success")){
+                            Intent intent = new Intent(PassengerCallActivity.this, PassengerWaitingActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else if(result.equals("callExist")){
+                            Toast.makeText(PassengerCallActivity.this, "콜이 이미 존재합니다.", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(PassengerCallActivity.this, "오류", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                     break;
             }
         }
@@ -483,4 +517,46 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
         }
     }; //myOnMapClickListener 구현
     //endregion
+
+    //region AsyncTask (DB통신)
+    class CustomTask extends AsyncTask<String, Void, String> {
+        String sendMsg, receiveMsg;
+
+        @Override
+        protected String doInBackground(String... strings) { //id, slocString, slocLat, slocLong, sdestLat, sdestLong 으로 6개가 필요
+            try {
+                String str, str_url;
+                str_url = "http://"+ Gloval.ip +":8080/highquick/makeCall.jsp";
+                URL url = new URL(str_url);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                conn.setRequestMethod("POST");
+                OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
+                //URL연결, 출력스트림 초기화
+                sendMsg = "id=" + strings[0] + "&slocString=" + strings[1] + "&slocLat=" + strings[2] + "&slocLong=" + strings[3] + "&sdestLat=" + strings[4] + "&sdestLong=" + strings[5];
+                osw.write(sendMsg);
+                osw.flush();
+                if (conn.getResponseCode() == conn.HTTP_OK) {
+                    InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "EUC-KR");
+                    BufferedReader reader = new BufferedReader(tmp);
+                    StringBuffer buffer = new StringBuffer();
+                    while ((str = reader.readLine()) != null) {
+                        buffer.append(str);
+                    }
+                    receiveMsg = buffer.toString();
+
+                } else {
+                    Log.i("통신 결과", conn.getResponseCode() + "에러");
+                }
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return receiveMsg;
+        }
+    }
+    //endregion
+
 }

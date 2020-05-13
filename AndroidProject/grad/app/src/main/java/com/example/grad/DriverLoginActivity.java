@@ -3,6 +3,7 @@ package com.example.grad;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,11 +26,14 @@ public class DriverLoginActivity extends AppCompatActivity {
     EditText et_id, et_pwd;
     Button btn_login, btn_signIn;
     String str_type = "driver"; //driveractivity면 driver로 변경
+
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_login);
-        //Button data = (Button) findViewById(R.id.btn_login);
 
         et_id = (EditText) findViewById(R.id.et_id);
         et_pwd = (EditText) findViewById(R.id.et_pwd);
@@ -38,21 +42,9 @@ public class DriverLoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(btnListener);
         btn_signIn.setOnClickListener(btnListener);
 
-        /*
-        data.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("로그 찍히나?","로그찍힘");
-                try {
-                    String result;
-                    CustomTask task = new CustomTask();
-                    result = task.execute("rain483","1234").get();
-                    Log.i("리턴 값",result);
-                } catch (Exception e) {
-                }
-            }
-        });
-         */
+        pref = getSharedPreferences(Gloval.PREFERENCE, MODE_PRIVATE);
+        editor = pref.edit();
+
     } // onCreate 끝
 
     class CustomTask extends AsyncTask<String, Void, String> {
@@ -104,6 +96,8 @@ public class DriverLoginActivity extends AppCompatActivity {
                     try {
                         String result = new CustomTask().execute(loginid, loginpwd, str_type).get();
                         if (result.equals("success")) {
+                            editor.putString("id",loginid);
+                            editor.commit();
                             Toast.makeText(DriverLoginActivity.this, getString(R.string.success), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(DriverLoginActivity.this, DriverLicenseActivity.class);
                             startActivity(intent);
@@ -120,22 +114,6 @@ public class DriverLoginActivity extends AppCompatActivity {
                     } catch (Exception e) { }
                     break;
                 case R.id.btn_signIn: // 회원가입
-                    /* 나중에 PassengerSignInActivity 작성할때 참고할 것.
-                    String joinid = et_id.getText().toString();
-                    String joinpwd = et_pwd.getText().toString();
-                    try {
-                        String result = new CustomTask().execute(joinid, joinpwd, "join").get();
-                        if (result.equals("id")) {
-                            Toast.makeText(DriverLoginActivity.this, "이미 존재하는 아이디입니다.", Toast.LENGTH_SHORT).show();
-                            et_id.setText("");
-                            et_pwd.setText("");
-                        } else if (result.equals("ok")) {
-                            et_id.setText("");
-                            et_pwd.setText("");
-                            Toast.makeText(DriverLoginActivity.this, "회원가입을 축하합니다.", Toast.LENGTH_SHORT).show();
-                        }
-                    } catch (Exception e) {
-                     */
                     Intent intent = new Intent(DriverLoginActivity.this, DriverJoinActivity.class);
                     startActivity(intent);
                     finish();

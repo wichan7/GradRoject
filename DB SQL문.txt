@@ -1,4 +1,6 @@
 #auto_increment 값 초기화하는법: https://amaze9001.tistory.com/28
+ALTER TABLE [TABLE명] AUTO_INCREMENT = [시작할 값];
+
 
 *passenger 테이블
 CREATE TABLE passenger(
@@ -18,16 +20,20 @@ name varchar(20),
 phone varchar(20),
 birth varchar(20),
 licenseCode varchar(20),
+callCount int(11) default 0,
+rating double default 0,
 isOn bool default false
 );
 
-*license 테이블
+
+*license 테이블 //안씀
 CREATE TABLE license(
 no int(11) PRIMARY KEY,
 birth varchar(20),
 licenseCode varchar(20),
 FOREIGN KEY (no) REFERENCES driver(no)
 );
+
 
 *calls 테이블
 CREATE TABLE calls(
@@ -36,6 +42,7 @@ calltime timestamp default NOW(),
 status int(11),
 sno int(11),
 gno int(11),
+slocString varchar(100),
 slocLat double,
 slocLong double,
 sdestLat double,

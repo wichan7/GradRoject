@@ -17,9 +17,9 @@ tools:context=".FirstInstallActivity">
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:text="하이퀵"
-            android:textSize="120px"
-            android:gravity="center"/>
+            android:textSize="36sp" />
     </LinearLayout>
 
     <LinearLayout

@@ -5,4 +5,5 @@ package com.example.grad;
  */
 public class Gloval {
     static final String ip = "54.180.153.173";
+    static final String PREFERENCE = "com.example.grad.spref"; //sharedPreference 태그
 }
