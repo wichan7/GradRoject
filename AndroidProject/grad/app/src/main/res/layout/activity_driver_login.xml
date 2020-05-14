@@ -20,7 +20,7 @@ tools:context=".DriverLoginActivity">
         android:gravity="center"
         android:text="하이퀵-기사"
         android:textColor="#F8F8F8"
-        android:textSize="120px"
+        android:textSize="50sp"
         android:textStyle="bold" />
 </LinearLayout>
 
