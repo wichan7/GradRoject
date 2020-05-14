@@ -19,15 +19,9 @@ tools:context=".FirstInstallActivity">
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="하이퀵"
-            android:textSize="36sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
+            android:textColor="#F8F8F8"
+            android:textSize="50sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -40,13 +34,23 @@ tools:context=".FirstInstallActivity">
             android:id="@+id/btn_PassengerLogin"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:text="승객 로그인" />
+            android:background="@drawable/bs"
+            android:backgroundTint="#F8F8F8"
+            android:text="승객 로그인"
+            android:textColor="#473C3C"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btn_DriverLogin"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:text="기사 로그인" />
+            android:background="@drawable/bs"
+            android:backgroundTint="#F8F8F8"
+            android:text="기사 로그인"
+            android:textColor="#473C3C"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </LinearLayout>

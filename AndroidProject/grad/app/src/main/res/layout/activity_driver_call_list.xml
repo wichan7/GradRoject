@@ -14,7 +14,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/bs"
-        android:backgroundTint="#878282"
+        android:backgroundTint="#F8F8F8"
+        android:tint="#0B0B0A"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_revert" />
@@ -22,10 +23,13 @@
     <com.kyleduo.switchbutton.SwitchButton
         android:id="@+id/sb_onoff"
         style="@style/SwitchButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:background="@drawable/bs"
+        android:backgroundTint="#F8F8F8"
+        android:buttonTint="#88FA05"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,5 +48,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_back" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

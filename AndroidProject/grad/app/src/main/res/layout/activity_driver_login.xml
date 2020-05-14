@@ -17,9 +17,11 @@ tools:context=".DriverLoginActivity">
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:text="하이퀵-기사"
+        android:textColor="#F8F8F8"
         android:textSize="120px"
-        android:gravity="center"/>
+        android:textStyle="bold" />
 </LinearLayout>
 
 <LinearLayout
@@ -32,19 +34,19 @@ tools:context=".DriverLoginActivity">
         android:id="@+id/et_id"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:textColor="#000"
-        android:textColorHint="#c9c9c9"
         android:hint="아이디"
-        android:textSize="23dp"/>
+        android:textColor="#F8F8F8"
+        android:textColorHint="#c9c9c9"
+        android:textSize="23dp" />
 
     <EditText
         android:id="@+id/et_pwd"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:textColor="#000"
-        android:textColorHint="#c9c9c9"
         android:hint="비밀번호"
-        android:textSize="23dp"/>
+        android:textColor="#F8F8F8"
+        android:textColorHint="#c9c9c9"
+        android:textSize="23dp" />
 
 </LinearLayout>
 
@@ -59,18 +61,22 @@ tools:context=".DriverLoginActivity">
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:background="@drawable/bs"
-        android:backgroundTint="#878282"
+        android:backgroundTint="#F8F8F8"
         android:text="로그인"
-        android:textColor="#000" />
+        android:textColor="#473C3C"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btn_signIn"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:background="@drawable/bs"
-        android:backgroundTint="#878282"
+        android:backgroundTint="#F8F8F8"
         android:text="회원가입"
-        android:textColor="#000" />
+        android:textColor="#473C3C"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 </LinearLayout>
 

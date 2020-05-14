@@ -22,15 +22,25 @@
 
         <Button
             android:id="@+id/btn_gotoPassengerCall"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Passengercall로 이동" />
+            android:background="@drawable/bs"
+            android:backgroundTint="#F8F8F8"
+            android:text="Passengercall로 이동"
+            android:textColor="#473C3C"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btn_gotoDriverCallList"
-            android:layout_width="wrap_content"
+            android:layout_width="206dp"
             android:layout_height="wrap_content"
-            android:text="DriverCallList로 이동" />
+            android:background="@drawable/bs"
+            android:backgroundTint="#F8F8F8"
+            android:text="DriverCallList로 이동"
+            android:textColor="#473C3C"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -44,7 +54,12 @@
             android:id="@+id/btn_gotoSelect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="정상 이동"/>
+            android:background="@drawable/bs"
+            android:backgroundTint="#F8F8F8"
+            android:text="정상 이동"
+            android:textColor="#473C3C"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView"
