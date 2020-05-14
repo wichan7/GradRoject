@@ -17,9 +17,9 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:text="하이퀵-승객"
-            android:textSize="120px"
-            android:gravity="center"/>
+            android:textSize="50sp" />
     </LinearLayout>
 
     <LinearLayout
