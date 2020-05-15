@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="승객의 수락을 기다리는중"
-        android:textColor="#F8F8F8"
+        android:textColor="#05c7f5"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline"

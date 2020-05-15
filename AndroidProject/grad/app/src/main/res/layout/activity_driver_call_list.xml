@@ -7,29 +7,14 @@
     tools:context=".DriverCallListActivity">
 
 
-    <ImageButton
-        android:id="@+id/btn_back"
-        android:layout_width="90dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/bs"
-        android:backgroundTint="#F8F8F8"
-        android:tint="#0B0B0A"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_revert" />
-
     <com.kyleduo.switchbutton.SwitchButton
         android:id="@+id/sb_onoff"
         style="@style/SwitchButtonStyle"
-        android:layout_width="70dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/bs"
-        android:backgroundTint="#F8F8F8"
-        android:buttonTint="#88FA05"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,7 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
@@ -47,7 +32,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_back" />
+        app:layout_constraintTop_toBottomOf="@+id/sb_onoff" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="콜 검색"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/sb_onoff"
+        app:layout_constraintEnd_toStartOf="@+id/sb_onoff"
+        app:layout_constraintTop_toTopOf="@+id/sb_onoff" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

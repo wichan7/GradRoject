@@ -19,7 +19,7 @@ tools:context=".FirstInstallActivity">
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="하이퀵"
-            android:textColor="#F8F8F8"
+            android:textColor="#05c7f5"
             android:textSize="50sp"
             android:textStyle="bold" />
     </LinearLayout>
