@@ -15,7 +15,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ShowPassengersLocationActivity"></activity>
+
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ShowPassengersLocationActivity" />
         <activity android:name=".ShowDriversLocationActivity" />
         <activity android:name=".DriverWaitingActivity" />
         <activity android:name=".PassengerWaitingActivity" />
@@ -35,11 +45,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBMWOaafJ_sqHCTUAbMP6pSx708LssT-aY" /> <!--  -->
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
