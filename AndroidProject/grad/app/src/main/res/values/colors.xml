@@ -12,4 +12,5 @@
     <color name="windowBackground">#f6f6f6</color>
     <color name="colorGray">#dbdbdb</color>
     <color name="colorSkyBlue">#05c7f5</color>
+    <color name="colorDarkBlue">#2057D6</color>
 </resources>

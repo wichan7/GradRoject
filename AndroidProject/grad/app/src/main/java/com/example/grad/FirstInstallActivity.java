@@ -9,8 +9,8 @@ import android.widget.Button;
 
 public class FirstInstallActivity extends AppCompatActivity {
 
-    private Button btn_PassengerLogin;
-    private Button btn_DriverLogin;
+    private View btn_PassengerLogin;
+    private View btn_DriverLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +22,6 @@ public class FirstInstallActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(FirstInstallActivity.this, PassengerLoginActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
         btn_DriverLogin = findViewById(R.id.btn_DriverLogin);
@@ -31,7 +30,6 @@ public class FirstInstallActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(FirstInstallActivity.this, DriverLoginActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
     }
