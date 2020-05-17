@@ -1,7 +1,5 @@
 package com.example.grad;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -9,14 +7,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -36,7 +33,7 @@ public class DriverCallListActivity extends AppCompatActivity {
     private TimerTask myTimerTask;
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         myTimer.cancel();
         super.onDestroy();
     }
@@ -47,13 +44,13 @@ public class DriverCallListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_driver_call_list);
         this.mContext = getApplicationContext();
 
-        mListView = (ListView)findViewById(R.id.list_calls);
+        mListView = (ListView) findViewById(R.id.list_calls);
         mListView.setOnItemClickListener(myOnItemClickListener);
         //ListView에 레이아웃 연결과 리스너 연결
 
 
         myTimer = new Timer();
-        myTimerTask = new TimerTask(){
+        myTimerTask = new TimerTask() {
             @Override
             public void run() {
                 try {
@@ -62,23 +59,23 @@ public class DriverCallListActivity extends AppCompatActivity {
 
                     // array_calls 초기화
                     array_calls = new ArrayList<>();
-                    StringTokenizer st = new StringTokenizer(result,"&");
-                    while(st.hasMoreTokens()){
+                    StringTokenizer st = new StringTokenizer(result, "&");
+                    while (st.hasMoreTokens()) {
                         String no = st.nextToken();
                         String slocString = st.nextToken();
                         String calltime = st.nextToken();
 
-                        CallListItem cli = new CallListItem(no,slocString,calltime);
+                        CallListItem cli = new CallListItem(no, slocString, calltime);
                         array_calls.add(cli);
                     } // array_calls 초기화 끝
 
                     // 메인쓰레드가 아닌곳에서 UI변경을 할 수 없으므로 runOnUI를 이용해서 변경
-                    runOnUiThread(new Runnable(){
+                    runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             myCallListViewAdapter = null;
                             mListView.setAdapter(null);
-                            myCallListViewAdapter = new CallListViewAdapter(mContext,array_calls);
+                            myCallListViewAdapter = new CallListViewAdapter(mContext, array_calls);
                             mListView.setAdapter(myCallListViewAdapter);
                         }
                     });
@@ -91,7 +88,7 @@ public class DriverCallListActivity extends AppCompatActivity {
                 }
             }
         };
-        myTimer.schedule(myTimerTask,0,5000); // 5초주기로 반복실행
+        myTimer.schedule(myTimerTask, 0, 5000); // 5초주기로 반복실행
 
     }//onCreate 끝
 
@@ -103,7 +100,7 @@ public class DriverCallListActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             try {
                 String str, str_url;
-                str_url = "http://"+ Gloval.ip +":8080/highquick/callList.jsp";
+                str_url = "http://" + Gloval.ip + ":8080/highquick/callList.jsp";
                 URL url = new URL(str_url);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -136,6 +133,12 @@ public class DriverCallListActivity extends AppCompatActivity {
     AdapterView.OnItemClickListener myOnItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            Intent intent = new Intent(DriverCallListActivity.this, DriverCallCheckActivity.class);
+            intent.putExtra("no", array_calls.get(position).no);
+            intent.putExtra("addr", array_calls.get(position).addr);
+            intent.putExtra("time", array_calls.get(position).time);
+            startActivity(intent);
             /*
             String s = array_calls.get(position).no;
             Toast.makeText(DriverCallListActivity.this, "아답터position:" + position + "해당 array의 cno:" + s, Toast.LENGTH_SHORT).show();
