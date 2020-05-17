@@ -1,16 +1,12 @@
 package com.example.grad;
 
-import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -39,17 +36,25 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
         btn_accept = findViewById(R.id.btn_accept);
         btn_accept.setOnClickListener(myOnClickListener);
 
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map); // selectActivity.xml에 있는 fragment의 id를 통해 mapFragment를 찾아 연결
+        mapFragment.getMapAsync(this); // getMapAsync가 호출되면 onMapReady 콜백이 실행됨.
+
         Intent intent = getIntent();
         no = intent.getExtras().getString("no");
         addr = intent.getExtras().getString("addr");
         time = intent.getExtras().getString("time");
+
+
+        Log.d("onCreate", "no : " + no);
+        Log.d("onCreate", "addr : " + addr);
+        Log.d("onCreate", "time : " + time);
     }
 
     View.OnClickListener myOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
- /*           LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+           /* LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             RelativeLayout relativeLayout = (RelativeLayout) inflater.inflate(R.layout.layout_dialog, null);
             setContentView(relativeLayout);*/
 
@@ -72,6 +77,8 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
         mMap = googleMap;
         geocoder = new Geocoder(this);
         createdMarker(addr);
+
+
     }
 
     public void createdMarker(String addr) {
@@ -105,6 +112,9 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
 
             // 해당 좌표로 화면 줌
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(point, 15));
+
+            Log.d("createdMarker", "latitude : " + latitude);
+            Log.d("createdMarker", "longitude : " + longitude);
 
         } catch (IOException e) {
             e.printStackTrace();
