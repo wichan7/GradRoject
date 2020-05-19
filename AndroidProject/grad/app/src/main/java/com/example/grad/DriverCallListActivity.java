@@ -28,15 +28,22 @@ public class DriverCallListActivity extends AppCompatActivity {
     private Context mContext;
     private ListView mListView;
     private CallListViewAdapter myCallListViewAdapter;
-    private ArrayList<CallListItem> array_calls; //CallListItem은 String addr, String time으로 이루어진 클래스
-    private Timer myTimer;
+    private ArrayList<CallListItem> array_calls;        // CallListItem은 String addr, String time으로 이루어진 클래스
+    private Timer myTimer;                              // 5초마다 실행시키기 위해 Timer 선언
     private TimerTask myTimerTask;
 
     @Override
-    protected void onDestroy() {
-        myTimer.cancel();
-        super.onDestroy();
+    protected void onPause() {
+        super.onPause();
+        setListOnOff(false);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setListOnOff(true);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,49 +55,19 @@ public class DriverCallListActivity extends AppCompatActivity {
         mListView.setOnItemClickListener(myOnItemClickListener);
         //ListView에 레이아웃 연결과 리스너 연결
 
-
         myTimer = new Timer();
-        myTimerTask = new TimerTask() {
-            @Override
-            public void run() {
-                try {
-
-                    String result = new GetCallListTask().execute().get(); //result에 no&slocString&calltime 이렇게 묶여서 들어옴
-
-                    // array_calls 초기화
-                    array_calls = new ArrayList<>();
-                    StringTokenizer st = new StringTokenizer(result, "&");
-                    while (st.hasMoreTokens()) {
-                        String no = st.nextToken();
-                        String slocString = st.nextToken();
-                        String calltime = st.nextToken();
-
-                        CallListItem cli = new CallListItem(no, slocString, calltime);
-                        array_calls.add(cli);
-                    } // array_calls 초기화 끝
-
-                    // 메인쓰레드가 아닌곳에서 UI변경을 할 수 없으므로 runOnUI를 이용해서 변경
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            myCallListViewAdapter = null;
-                            mListView.setAdapter(null);
-                            myCallListViewAdapter = new CallListViewAdapter(mContext, array_calls);
-                            mListView.setAdapter(myCallListViewAdapter);
-                        }
-                    });
-                    //RunOnUI end
-
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        myTimer.schedule(myTimerTask, 0, 5000); // 5초주기로 반복실행
-
+        myTimerTask = new MyTimerTask();
     }//onCreate 끝
+
+    protected void setListOnOff(boolean flag) {
+        if (flag == true) {
+            myTimer = new Timer();
+            myTimerTask = new MyTimerTask();
+            myTimer.schedule(myTimerTask, 0, 5000); // 5초주기로 반복실행
+        } else if (flag == false) {
+            myTimer.cancel();
+        }
+    }
 
     //region AsyncTask
     class GetCallListTask extends AsyncTask<String, Void, String> {
@@ -148,4 +125,44 @@ public class DriverCallListActivity extends AppCompatActivity {
         }
     };
     //endregion
+
+    class MyTimerTask extends TimerTask {
+        @Override
+        public void run() {
+            try {
+
+                String result = new GetCallListTask().execute().get(); //result에 no&slocString&calltime 이렇게 묶여서 들어옴
+
+                // array_calls 초기화
+                array_calls = new ArrayList<>();
+                StringTokenizer st = new StringTokenizer(result, "&");
+                while (st.hasMoreTokens()) {
+                    String no = st.nextToken();
+                    String slocString = st.nextToken();
+                    String calltime = st.nextToken();
+
+                    CallListItem cli = new CallListItem(no, slocString, calltime);
+                    array_calls.add(cli);
+                } // array_calls 초기화 끝
+
+                // 메인쓰레드가 아닌곳에서 UI변경을 할 수 없으므로 runOnUI를 이용해서 변경
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        myCallListViewAdapter = null;
+                        mListView.setAdapter(null);
+                        myCallListViewAdapter = new CallListViewAdapter(mContext, array_calls);
+                        mListView.setAdapter(myCallListViewAdapter);
+                    }
+                });
+                //RunOnUI end
+
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    } //MyTimerTask end
+
 }
