@@ -3,6 +3,7 @@ package com.example.grad;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -427,6 +428,27 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
             switch (v.getId()) {
                 case R.id.btn_accept:
                     //TODO: status가 1이되고, 승객의 수락을 기다리는 화면으로 넘어감
+                    SharedPreferences pref = getSharedPreferences(Gloval.PREFERENCE, MODE_PRIVATE);
+                    String id = pref.getString("id", "");
+                    String glocLat = Double.toString(currentPosition.latitude);
+                    String glocLong = Double.toString(currentPosition.longitude);
+
+                    try {
+                        String result = new AcceptTask().execute(cno, id, glocLat, glocLong).get();
+                        if (result.equals("success")) {                                           // 성공적으로 콜을 잡은경우
+                            //다음엑티비티로 넘어가고 finish()
+                        } else if (result.equals("fail")) {                                       // 이미 기사가 정해진경우
+                            //finish하고 toast메세지 띄움.
+                            Toast.makeText(DriverCallCheckActivity.this, "종료된 콜입니다.", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {                                                                   // 다른 값이 들어왔을 때.
+                            Log.i("DriverCallCheckActivity","AcceptTask에서 예상치 못한 값이 넘어옴.");
+                        }
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     break;
             }
         }
