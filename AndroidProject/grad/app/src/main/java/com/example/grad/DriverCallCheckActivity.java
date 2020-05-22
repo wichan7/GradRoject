@@ -5,6 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -16,7 +19,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,6 +38,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -171,14 +175,41 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
             sdestMarker.position(sDest);
             sdestMarker.title("승객의 목적지");
             sdestMarker.snippet("승객의 목적지입니다.");
+            //마커 사진넣기 + 사이즈 조정 false일때 사이즈 크기가 변동안됨 / true는 작은걸 확대시키는데 Out of Memory 발생
+            Bitmap c = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.t_pic),20,20,false);
+            sdestMarker.icon(BitmapDescriptorFactory.fromBitmap(c));
+
+            //sdestMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));//마커색깔 변경용
+
             //TODO: 마커 색상 변경(승객위치와 목적지 구분을 위해)
             mMap.addMarker(slocMarker);
             mMap.addMarker(sdestMarker);
             //TODO: 위치와 목적지사이의 직선거리를 계산해서 알맞은 카메라 줌(v) 결정하기, 카메라 위치도 그 중간에 두기
             // 두 점 사이의 거리=√(( X2 - X1 ) ^2 + ( Y2 - Y1 ) ^2)
             // 두 점의 중점 (X,Y) = ( (X1+X2)/2 , (Y1+Y2)/2 )
+            //////////////////////////////////////////////////////////////////////////////////////////////////
+            Log.d("loc_","sLoc 위도 : " + sLoc.latitude + " 경도 :" + sLoc.longitude);
+            Log.d("loc_","sDest 위도 : " + sDest.latitude + " 경도 :" + sDest.longitude);
+            double test1 = sLoc.latitude - sDest.latitude;
+            double test2 = sLoc.longitude - sDest.longitude;
+            double result1 = Math.pow(test1,2) + Math.pow(test2,2);
+            Math.sqrt(result1);
+            Log.d("loc_" , "위도 제곱값 : " +  Math.pow(test1,2) + " 경도 제곱값 : " +  Math.pow(test2,2) + " 두 점 사이의 거리 : " + Math.sqrt(result1) );
 
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(slocMarker.getPosition(), 15);
+            double mid_x = (sLoc.latitude + sDest.latitude)/2;
+            double mid_y = (sLoc.longitude + sDest.longitude)/2;
+            Log.d("loc_" , "X : " + mid_x + " Y : " + mid_y);
+            LatLng Mid_loc = new LatLng(mid_x , mid_y);
+            //////////////////////////////////////////////////////////////////////////////////////////
+            MarkerOptions smidMarker = new MarkerOptions();//가운데 위치 확인용
+            smidMarker.position(Mid_loc);
+            smidMarker.title("가운데의 위치");
+            smidMarker.snippet("가운데의 위치입니다.");
+            mMap.addMarker(smidMarker);
+
+            ////////////////추가로 계산예정///////////////////////////////////////////////////////////
+
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(Mid_loc, 12.7f);
             mMap.moveCamera(cameraUpdate);
         } catch (ExecutionException e) {
             e.printStackTrace();
