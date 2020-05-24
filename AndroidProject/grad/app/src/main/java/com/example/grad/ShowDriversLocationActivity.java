@@ -43,9 +43,9 @@ public class ShowDriversLocationActivity extends AppCompatActivity implements On
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
         mMap.setMyLocationEnabled(true);
 
-        mMap = googleMap;
         LatLng DEFAULT_LOCATION = new LatLng(37.56, 126.97);
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 15);
         mMap.moveCamera(cameraUpdate);

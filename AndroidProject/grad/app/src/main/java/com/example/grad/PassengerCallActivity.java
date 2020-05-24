@@ -51,6 +51,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Locale;
+import java.util.StringTokenizer;
 import java.util.concurrent.ExecutionException;
 
 public class PassengerCallActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -471,8 +472,13 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
 
                     try {
                         String result = new CustomTask().execute(id,slocString,slocLat,slocLong,sdestLat,sdestLong).get();
+                        StringTokenizer st = new StringTokenizer(result, "&");
+                        result = st.nextToken();
                         if(result.equals("success")){
+                            int cno = Integer.parseInt(st.nextToken());
+                            Log.i("PassengerCallActivity","받아온 cno:"+cno);
                             Intent intent = new Intent(PassengerCallActivity.this, PassengerWaitingActivity.class);
+                            intent.putExtra("cno", cno);
                             startActivity(intent);
                             finish();
                         }

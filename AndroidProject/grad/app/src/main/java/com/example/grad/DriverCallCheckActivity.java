@@ -467,7 +467,13 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
                     try {
                         String result = new AcceptTask().execute(cno, id, glocLat, glocLong).get();
                         if (result.equals("success")) {                                           // 성공적으로 콜을 잡은경우
-                            //다음엑티비티로 넘어가고 finish()
+                            Intent intent = new Intent(DriverCallCheckActivity.this,DriverWaitingActivity.class);
+                            intent.putExtra("cno",Integer.parseInt(cno));
+                            startActivity(intent);
+                            finish();
+                        } else if (result.equals("callExist")){                                  // 기사에게 이미 콜이 있을경우
+                            Toast.makeText(DriverCallCheckActivity.this, "이미 진행중인 콜이 있습니다.", Toast.LENGTH_SHORT).show();
+                            finish();
                         } else if (result.equals("fail")) {                                       // 이미 기사가 정해진경우
                             //finish하고 toast메세지 띄움.
                             Toast.makeText(DriverCallCheckActivity.this, "종료된 콜입니다.", Toast.LENGTH_SHORT).show();
@@ -525,7 +531,6 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
         }
     }
 
-    //
     class AcceptTask extends AsyncTask<String, Void, String> {
         String sendMsg, receiveMsg;
 

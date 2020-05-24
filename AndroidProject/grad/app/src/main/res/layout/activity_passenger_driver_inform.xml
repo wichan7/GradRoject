@@ -6,97 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".PassengerDriverInformActivity">
 
-    <ImageButton
-        android:id="@+id/btn_back"
-        android:layout_width="90dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="#FFC107"
+    <TableLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/border_layout"
+        android:stretchColumns="0,1"
+        app:layout_constraintBottom_toTopOf="@+id/btn_accept"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_revert" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tv_01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="98dp"
-        android:layout_marginBottom="30dp"
-        android:text="기사명 : "
-        app:layout_constraintBottom_toTopOf="@+id/tv_02"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginBottom="30dp"
-        android:text="차량 번호 : "
-        app:layout_constraintBottom_toTopOf="@+id/tv_03"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_01"
-        tools:visibility="visible" />
+            <TextView
+                android:text="기사명"
+                android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/tv_03"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginBottom="30dp"
-        android:text="전화번호 : "
-        app:layout_constraintBottom_toTopOf="@+id/tv_04"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_02" />
+            <TextView
+                android:text="NULL"
+                android:textAlignment="center" />
+        </TableRow>
 
-    <TextView
-        android:id="@+id/tv_04"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginBottom="168dp"
-        android:text="예상 소요시간 : "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_driverName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:text="김갑순"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_01"
-        app:layout_constraintStart_toEndOf="@+id/tv_01" />
+            <TextView
+                android:text="전화번호"
+                android:textAlignment="center" />
 
-    <TextView
-        android:id="@+id/tv_phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:text="010-1234-5678"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_03"
-        app:layout_constraintStart_toEndOf="@+id/tv_03" />
+            <TextView
+                android:text="NULL"
+                android:textAlignment="center" />
+        </TableRow>
 
-    <TextView
-        android:id="@+id/tv_carNum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:text="12가 3456"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_02"
-        app:layout_constraintStart_toEndOf="@+id/tv_02" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:text="5분"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_04"
-        app:layout_constraintStart_toEndOf="@+id/tv_04" />
+            <TextView
+                android:text="콜 횟수"
+                android:textAlignment="center" />
+
+            <TextView
+                android:text="NULL"
+                android:textAlignment="center" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="평균 별점"
+                android:textAlignment="center" />
+
+            <TextView
+                android:text="NULL"
+                android:textAlignment="center" />
+        </TableRow>
+    </TableLayout>
 
     <Button
         android:id="@+id/btn_accept"
@@ -106,9 +81,7 @@
         android:layout_marginBottom="56dp"
         android:text="수 락"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_04"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_refuse"
