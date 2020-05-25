@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -31,12 +32,12 @@ public class DriverWaitingActivity extends AppCompatActivity {
     private TimerTask myTimerTask;
     private Button btn_cancel;
 
-    /*@Override
+    @Override
     protected void onDestroy(){
 
         super.onDestroy();
         myTimer.cancel();
-    }*/
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,27 +62,34 @@ public class DriverWaitingActivity extends AppCompatActivity {
     class MyTimerTask extends TimerTask{
         @Override
         public void run() {
-            try {
-                String result = new GetStatusTask().execute(Integer.toString(cno)).get();
-                status = Integer.parseInt(result);
+            Handler mHandler = new Handler(Looper.getMainLooper());
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        String result = new GetStatusTask().execute(Integer.toString(cno)).get();
+                        status = Integer.parseInt(result);
 
-                if (status == -1) {                                                                // -1: 콜이 종료된 상태
-                    Toast.makeText(DriverWaitingActivity.this, "종료된 콜입니다.", Toast.LENGTH_SHORT).show();
-                    finish();
-                }else if (status == 1){                                                           // 1: 기사만 수락한 상태
-                    //TODO: 기다릴때 뭐 뱅글뱅글 도는 로딩창같은거 넣으면 좋을듯
-                }else if (status == 2){                                                           // 2: 2이면 승객이 수락한 것
-                    Intent intent = new Intent(DriverWaitingActivity.this, ShowPassengersLocationActivity.class);
-                    intent.putExtra("cno",cno);
-                    startActivity(intent);
-                    finish();
+                        if (status == -1) {                                                                // -1: 콜이 종료된 상태
+                            Toast.makeText(DriverWaitingActivity.this, "종료된 콜입니다.", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }else if (status == 1){                                                           // 1: 기사만 수락한 상태
+                            //TODO: 기다릴때 뭐 뱅글뱅글 도는 로딩창같은거 넣으면 좋을듯
+                        }else if (status == 2){                                                           // 2: 2이면 승객이 수락한 것
+                            Intent intent = new Intent(DriverWaitingActivity.this, ShowPassengersLocationActivity.class);
+                            intent.putExtra("cno",cno);
+                            startActivity(intent);
+                            finish();
+                        }
+
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
+            }, 0); //handler end
 
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -183,8 +191,6 @@ public class DriverWaitingActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     Toast.makeText(DriverWaitingActivity.this,"콜을 취소하셨습니다.",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(DriverWaitingActivity.this, PassengerCallActivity.class);
-                    startActivity(intent);
                     finish();
                     break;
             }

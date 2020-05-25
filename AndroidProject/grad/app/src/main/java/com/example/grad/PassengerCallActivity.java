@@ -474,6 +474,7 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
                         String result = new CustomTask().execute(id,slocString,slocLat,slocLong,sdestLat,sdestLong).get();
                         StringTokenizer st = new StringTokenizer(result, "&");
                         result = st.nextToken();
+                        Log.i("PassengerCallActivity",result);
                         if(result.equals("success")){
                             int cno = Integer.parseInt(st.nextToken());
                             Log.i("PassengerCallActivity","받아온 cno:"+cno);

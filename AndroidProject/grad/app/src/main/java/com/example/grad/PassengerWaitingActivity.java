@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,16 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
 
+/* TimerTask할때 넣어야하는코드
+Handler mHandler = new Handler(Looper.getMainLooper());
+mHandler.postDelayed(new Runnable() {
+    @Override
+    public void run() {
+        // code
+
+    }
+}, 0);
+ */
 public class PassengerWaitingActivity extends AppCompatActivity {
     private int cno;
     private int status;
@@ -30,12 +41,12 @@ public class PassengerWaitingActivity extends AppCompatActivity {
     private TimerTask myTimerTask;
     private Button btn_cancel;
 
-   /* @Override
+    @Override
     protected void onDestroy(){
 
         super.onDestroy();
         myTimer.cancel();
-    }*/
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,31 +69,38 @@ public class PassengerWaitingActivity extends AppCompatActivity {
     }
 
     class MyTimerTask extends TimerTask{
+
         @Override
         public void run() {
-            try {
-                String result = new GetStatusTask().execute(Integer.toString(cno)).get();
-                status = Integer.parseInt(result);
+            Handler mHandler = new Handler(Looper.getMainLooper());
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        String result = new GetStatusTask().execute(Integer.toString(cno)).get();
+                        status = Integer.parseInt(result);
 
-                if (status == -1) {                                                                // -1: 콜이 종료된 상태
-                    Toast.makeText(PassengerWaitingActivity.this, "종료된 콜입니다.", Toast.LENGTH_SHORT).show();
-                    finish();
-                } else if (status == 0){                                                          // 0: 기사가 수락 안한상태
-                    //TODO: 기다릴때 뭐 뱅글뱅글 도는 로딩창같은거 넣으면 좋을듯
-                } else if (status == 1){                                                          // 1: 기사가 수락한 상태
-                    Intent intent = new Intent(PassengerWaitingActivity.this, PassengerDriverInformActivity.class);
-                    intent.putExtra("cno", cno);
-                    startActivity(intent);
-                    finish();
-                } else if (status == 2){                                                          // 2: 이 다음화면에서 수락눌렀을경우 2임. 따라서 바로 다음다음화면으로 넘겨줌.
-                    //TODO:  이 다음화면에서 수락눌렀을경우 2임. 따라서 바로 다음다음화면으로 넘겨줌.
+                        if (status == -1) {                                                                // -1: 콜이 종료된 상태
+                            Toast.makeText(PassengerWaitingActivity.this, "종료된 콜입니다.", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else if (status == 0){                                                          // 0: 기사가 수락 안한상태
+                            //TODO: 기다릴때 뭐 뱅글뱅글 도는 로딩창같은거 넣으면 좋을듯
+                        } else if (status == 1){                                                          // 1: 기사가 수락한 상태
+                            Intent intent = new Intent(PassengerWaitingActivity.this, PassengerDriverInformActivity.class);
+                            intent.putExtra("cno", cno);
+                            startActivity(intent);
+                            finish();
+                        } else if (status == 2){                                                          // 2: 이 다음화면에서 수락눌렀을경우 2임. 따라서 바로 다음다음화면으로 넘겨줌.
+                            //TODO:  이 다음화면에서 수락눌렀을경우 2임. 따라서 바로 다음다음화면으로 넘겨줌.
+                        }
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
+            }, 0); //handler end
 
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
     }
 
