@@ -176,7 +176,7 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
             sdestMarker.title("승객의 목적지");
             sdestMarker.snippet("승객의 목적지입니다.");
             //마커 사진넣기 + 사이즈 조정 false일때 사이즈 크기가 변동안됨 / true는 작은걸 확대시키는데 Out of Memory 발생
-            Bitmap c = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.t_pic),20,20,false);
+            Bitmap c = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.t_pic),50,50,false);
             sdestMarker.icon(BitmapDescriptorFactory.fromBitmap(c));
 
             //sdestMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));//마커색깔 변경용

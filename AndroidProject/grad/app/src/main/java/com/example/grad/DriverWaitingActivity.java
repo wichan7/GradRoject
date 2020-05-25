@@ -31,6 +31,13 @@ public class DriverWaitingActivity extends AppCompatActivity {
     private TimerTask myTimerTask;
     private Button btn_cancel;
 
+    /*@Override
+    protected void onDestroy(){
+
+        super.onDestroy();
+        myTimer.cancel();
+    }*/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
