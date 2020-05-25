@@ -23,7 +23,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
 
-//TODO: 온오프버튼 구현안됨, Pause에도 cancel() 넣어야할듯?? 수정해야함
 public class DriverCallListActivity extends AppCompatActivity {
     private Context mContext;
     private ListView mListView;
@@ -120,8 +119,6 @@ public class DriverCallListActivity extends AppCompatActivity {
             String s = array_calls.get(position).no;
             Toast.makeText(DriverCallListActivity.this, "아답터position:" + position + "해당 array의 cno:" + s, Toast.LENGTH_SHORT).show();
              */
-
-            //TODO: 이곳에 intent putExtra로 drivercheck로 cno 넘기는 코드 작성.
         }
     };
     //endregion

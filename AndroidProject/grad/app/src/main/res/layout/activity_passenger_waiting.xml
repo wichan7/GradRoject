@@ -11,6 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="기사의 수락을 기다리는중"
+        android:textColor="@color/colorSkyBlue"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +26,7 @@
         app:layout_constraintGuide_percent = "0.50" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="콜 취소"
