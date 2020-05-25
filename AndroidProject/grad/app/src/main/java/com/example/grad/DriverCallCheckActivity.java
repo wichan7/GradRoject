@@ -180,7 +180,7 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
             sdestMarker.icon(BitmapDescriptorFactory.fromBitmap(c));
 
             //sdestMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));//마커색깔 변경용
-
+            slocMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
             //TODO: 마커 색상 변경(승객위치와 목적지 구분을 위해)
             mMap.addMarker(slocMarker);
             mMap.addMarker(sdestMarker);
@@ -205,11 +205,11 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
             smidMarker.position(Mid_loc);
             smidMarker.title("가운데의 위치");
             smidMarker.snippet("가운데의 위치입니다.");
-            mMap.addMarker(smidMarker);
+            //mMap.addMarker(smidMarker);
 
             ////////////////추가로 계산예정///////////////////////////////////////////////////////////
 
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(Mid_loc, 12.7f);
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(Mid_loc, 14f);
             mMap.moveCamera(cameraUpdate);
         } catch (ExecutionException e) {
             e.printStackTrace();
