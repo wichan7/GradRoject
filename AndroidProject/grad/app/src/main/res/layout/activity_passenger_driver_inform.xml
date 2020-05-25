@@ -10,75 +10,173 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        android:background="@drawable/border_layout"
-        android:stretchColumns="0,1"
+        android:stretchColumns="1"
         app:layout_constraintBottom_toTopOf="@+id/btn_accept"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/guideline11">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/colorDarkBlue"
+            android:gravity="center_vertical"
+            android:text="기사 정보"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp" />
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/colorGray">
 
             <TextView
+                android:layout_height="35dp"
+                android:layout_margin="1dp"
+                android:background="@color/windowBackground"
                 android:text="기사명"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="18sp" />
 
             <TextView
-                android:text="NULL"
-                android:textAlignment="center" />
+                android:id="@+id/tv_name"
+                android:layout_height="35dp"
+                android:layout_margin="1dp"
+                android:background="@color/windowBackground"
+                android:text="홍길동"
+                android:textAlignment="center"
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/colorGray">
 
             <TextView
+                android:layout_height="35dp"
+                android:layout_margin="1dp"
+                android:background="@color/windowBackground"
                 android:text="전화번호"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="18sp" />
 
             <TextView
-                android:text="NULL"
-                android:textAlignment="center" />
+                android:id="@+id/tv_phone"
+                android:layout_height="35dp"
+                android:layout_margin="1dp"
+                android:background="@color/windowBackground"
+                android:text="010-1234-5678"
+                android:textAlignment="center"
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/colorGray">
 
             <TextView
+                android:layout_height="35dp"
+                android:layout_margin="1dp"
+                android:background="@color/windowBackground"
                 android:text="콜 횟수"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="18sp" />
 
             <TextView
-                android:text="NULL"
-                android:textAlignment="center" />
+                android:id="@+id/tv_count"
+                android:layout_height="35dp"
+                android:layout_margin="1dp"
+                android:background="@color/windowBackground"
+                android:text="50회"
+                android:textAlignment="center"
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/colorGray">
 
             <TextView
+                android:layout_height="35dp"
+                android:layout_margin="1dp"
+                android:background="@color/windowBackground"
                 android:text="평균 별점"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="18sp" />
 
             <TextView
-                android:text="NULL"
-                android:textAlignment="center" />
+                android:id="@+id/tv_rating"
+                android:layout_height="35dp"
+                android:layout_margin="1dp"
+                android:background="@color/windowBackground"
+                android:text="5.0"
+                android:textAlignment="center"
+                android:textSize="18sp" />
         </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorGray">
+
+            <TextView
+                android:layout_height="35dp"
+                android:layout_margin="1dp"
+                android:background="@color/windowBackground"
+                android:text="차량 번호"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_car"
+                android:layout_height="35dp"
+                android:layout_margin="1dp"
+                android:background="@color/windowBackground"
+                android:text="123가 4567"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorGray">
+
+            <TextView
+                android:layout_height="35dp"
+                android:layout_margin="1dp"
+                android:background="@color/windowBackground"
+                android:paddingLeft="8dp"
+                android:paddingEnd="8dp"
+                android:text="예상 소요시간"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_height="35dp"
+                android:layout_margin="1dp"
+                android:background="@color/windowBackground"
+                android:text="n분"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+        </TableRow>
+
     </TableLayout>
 
     <Button
         android:id="@+id/btn_accept"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/border_layout"
         android:text="수 락"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -87,10 +185,18 @@
         android:id="@+id/btn_refuse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/border_layout"
         android:text="거 절"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
