@@ -77,7 +77,7 @@ public class DriverWaitingActivity extends AppCompatActivity {
                             //TODO: 기다릴때 뭐 뱅글뱅글 도는 로딩창같은거 넣으면 좋을듯
                         }else if (status == 2){                                                           // 2: 2이면 승객이 수락한 것
                             Intent intent = new Intent(DriverWaitingActivity.this, ShowPassengersLocationActivity.class);
-                            intent.putExtra("cno",cno);
+                            intent.putExtra("cno",Integer.toString(cno));
                             startActivity(intent);
                             finish();
                         }
