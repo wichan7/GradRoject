@@ -17,7 +17,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.StringTokenizer;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -138,9 +142,25 @@ public class DriverCallListActivity extends AppCompatActivity {
                     String slocString = st.nextToken();
                     String calltime = st.nextToken();
 
-                    CallListItem cli = new CallListItem(no, slocString, calltime);
+                    Calendar nowTime = Calendar.getInstance();
+                    Date nowTimefo = null;
+                    Date callTimefo = null;
+                    try {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        //nowTimefo = sdf.parse(String.valueOf(nowTime));
+                        nowTimefo = nowTime.getTime();
+                        callTimefo = sdf.parse(calltime);
+
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    long callTime = nowTimefo.getTime() - callTimefo.getTime();
+                    long resultcallTime = callTime / (60 * 1000);
+
+                    CallListItem cli = new CallListItem(no, slocString, Long.toString(resultcallTime)+"분 전");
                     array_calls.add(cli);
-                } // array_calls 초기화 끝
+                }
 
                 // 메인쓰레드가 아닌곳에서 UI변경을 할 수 없으므로 runOnUI를 이용해서 변경
                 runOnUiThread(new Runnable() {
