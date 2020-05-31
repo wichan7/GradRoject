@@ -176,7 +176,7 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
             sdestMarker.title("승객의 목적지");
             sdestMarker.snippet("승객의 목적지입니다.");
             //마커 사진넣기 + 사이즈 조정 false일때 사이즈 크기가 변동안됨 / true는 작은걸 확대시키는데 Out of Memory 발생
-            Bitmap c = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.t_pic),50,50,false);
+            Bitmap c = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.t_pic), 50, 50, false);
             sdestMarker.icon(BitmapDescriptorFactory.fromBitmap(c));
 
             //sdestMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));//마커색깔 변경용
@@ -188,28 +188,28 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
             // 두 점 사이의 거리=√(( X2 - X1 ) ^2 + ( Y2 - Y1 ) ^2)
             // 두 점의 중점 (X,Y) = ( (X1+X2)/2 , (Y1+Y2)/2 )
             //////////////////////////////////////////////////////////////////////////////////////////////////
-            Log.d("loc_","sLoc 위도 : " + sLoc.latitude + " 경도 :" + sLoc.longitude);
-            Log.d("loc_","sDest 위도 : " + sDest.latitude + " 경도 :" + sDest.longitude);
+            Log.d("Location_", "sLoc 위도 : " + sLoc.latitude + " 경도 :" + sLoc.longitude); //목적지 위치1
+            Log.d("Location_", "sDest 위도 : " + sDest.latitude + " 경도 :" + sDest.longitude); //목적지 위치1
             double test1 = sLoc.latitude - sDest.latitude;
             double test2 = sLoc.longitude - sDest.longitude;
-            double result1 = Math.pow(test1,2) + Math.pow(test2,2);
-            Math.sqrt(result1);
-            Log.d("loc_" , "위도 제곱값 : " +  Math.pow(test1,2) + " 경도 제곱값 : " +  Math.pow(test2,2) + " 두 점 사이의 거리 : " + Math.sqrt(result1) );
+            double result1 = Math.pow(test1, 2) + Math.pow(test2, 2);
+            double mid_distance = Math.sqrt(result1) * Math.pow(10, 5); //두점 사이의 거리
+            Log.d("Location_", "위도 제곱값 : " + Math.pow(test1, 2) + " 경도 제곱값 : " + Math.pow(test2, 2) + " 두 점 사이의 거리 : " + mid_distance);
 
-            double mid_x = (sLoc.latitude + sDest.latitude)/2;
-            double mid_y = (sLoc.longitude + sDest.longitude)/2;
-            Log.d("loc_" , "X : " + mid_x + " Y : " + mid_y);
-            LatLng Mid_loc = new LatLng(mid_x , mid_y);
+            double mid_x = (sLoc.latitude + sDest.latitude) / 2;
+            double mid_y = (sLoc.longitude + sDest.longitude) / 2;
+            Log.d("Location_", "X : " + mid_x + " Y : " + mid_y);
+            LatLng Mid_loc = new LatLng(mid_x, mid_y);
             //////////////////////////////////////////////////////////////////////////////////////////
             MarkerOptions smidMarker = new MarkerOptions();//가운데 위치 확인용
             smidMarker.position(Mid_loc);
             smidMarker.title("가운데의 위치");
             smidMarker.snippet("가운데의 위치입니다.");
-            //mMap.addMarker(smidMarker);
+            mMap.addMarker(smidMarker);
 
             ////////////////추가로 계산예정///////////////////////////////////////////////////////////
 
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(Mid_loc, 14f);
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(Mid_loc, getZoomLevel(mid_distance));
             mMap.moveCamera(cameraUpdate);
         } catch (ExecutionException e) {
             e.printStackTrace();
@@ -217,6 +217,76 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
             e.printStackTrace();
         }
     } //OnMapReady 끝
+
+    //거리별 계산한 근사값
+    /*
+    776 16.7   -> 16  구의역 직선
+    1450 15.5  -> 15  직선 어린이대공원
+    5980 13.5  -> 13 대각선 압구정
+    10204 13   -> 12.3 대각선 가천대
+    1440 15.5  -> 15 직선 광양중
+    1000 16    -> 15.6    대각선 혜민병원
+    6278 13    -> 12.6 대각선 압구정역
+    */
+    public float getZoomLevel(double mid_distance) {
+        float setZoom = 0;
+        if (375 < mid_distance && mid_distance < 750) {
+            if (mid_distance < (375 + 750) / 2) {
+                setZoom = 17f;
+            } else {
+                setZoom = 16f + 0.5f;
+            }
+        } else if (750 < mid_distance && mid_distance < 1500) {
+            if (mid_distance < (750 + 1500) / 2) {
+                setZoom = 16f;
+            } else {
+                setZoom = 15f + 0.5f;
+            }
+        } else if (1500 < mid_distance && mid_distance < 3000) {
+            if (mid_distance < (1500 + 3000) / 2) {
+                setZoom = 15f;
+            } else {
+                setZoom = 14f + 0.5f;
+            }
+        } else if (3000 < mid_distance && mid_distance < 6000) {
+            if (mid_distance < (3000 + 6000) / 2) {
+                setZoom = 14f;
+            } else {
+                setZoom = 13f + 0.5f;
+            }
+        } else if (6000 < mid_distance && mid_distance < 12000) {
+            if (mid_distance < (6000 + 12000) / 2) {
+                setZoom = 13f;
+            } else {
+                setZoom = 12f + 0.5f;
+            }
+        } else if (12000 < mid_distance && mid_distance < 24000) {
+            if (mid_distance < (12000 + 24000) / 2) {
+                setZoom = 12f;
+            } else {
+                setZoom = 11f + 0.5f;
+            }
+        } else if (24000 < mid_distance && mid_distance < 48000) {
+            if (mid_distance < (24000 + 48000) / 2) {
+                setZoom = 11f;
+            } else {
+                setZoom = 10f + 0.5f;
+            }
+        } else if (48000 < mid_distance && mid_distance < 96000) {
+            if (mid_distance < (48000 + 96000) / 2) {
+                setZoom = 10f;
+            } else {
+                setZoom = 9f + 0.5f;
+            }
+        } else if (96000 < mid_distance && mid_distance < 192000) {
+            if (mid_distance < (96000 + 192000) / 2) {
+                setZoom = 9f;
+            } else {
+                setZoom = 8f + 0.5f;
+            }
+        }
+        return setZoom;
+    }
 
     //region GPS를 위한 코드
     LocationCallback locationCallback = new LocationCallback() { //locationCallback 객체 생성
@@ -467,11 +537,11 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
                     try {
                         String result = new AcceptTask().execute(cno, id, glocLat, glocLong).get();
                         if (result.equals("success")) {                                           // 성공적으로 콜을 잡은경우
-                            Intent intent = new Intent(DriverCallCheckActivity.this,DriverWaitingActivity.class);
-                            intent.putExtra("cno",Integer.parseInt(cno));
+                            Intent intent = new Intent(DriverCallCheckActivity.this, DriverWaitingActivity.class);
+                            intent.putExtra("cno", Integer.parseInt(cno));
                             startActivity(intent);
                             finish();
-                        } else if (result.equals("callExist")){                                  // 기사에게 이미 콜이 있을경우
+                        } else if (result.equals("callExist")) {                                  // 기사에게 이미 콜이 있을경우
                             Toast.makeText(DriverCallCheckActivity.this, "이미 진행중인 콜이 있습니다.", Toast.LENGTH_SHORT).show();
                             finish();
                         } else if (result.equals("fail")) {                                       // 이미 기사가 정해진경우
@@ -479,7 +549,7 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
                             Toast.makeText(DriverCallCheckActivity.this, "종료된 콜입니다.", Toast.LENGTH_SHORT).show();
                             finish();
                         } else {                                                                   // 다른 값이 들어왔을 때.
-                            Log.i("DriverCallCheckActivity","AcceptTask에서 예상치 못한 값이 넘어옴.");
+                            Log.i("DriverCallCheckActivity", "AcceptTask에서 예상치 못한 값이 넘어옴.");
                         }
                     } catch (ExecutionException e) {
                         e.printStackTrace();
