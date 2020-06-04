@@ -543,10 +543,14 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
                             finish();
                         } else if (result.equals("callExist")) {                                  // 기사에게 이미 콜이 있을경우
                             Toast.makeText(DriverCallCheckActivity.this, "이미 진행중인 콜이 있습니다.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(DriverCallCheckActivity.this, DriverCallListActivity.class);
+                            startActivity(intent);
                             finish();
                         } else if (result.equals("fail")) {                                       // 이미 기사가 정해진경우
                             //finish하고 toast메세지 띄움.
                             Toast.makeText(DriverCallCheckActivity.this, "종료된 콜입니다.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(DriverCallCheckActivity.this, DriverCallListActivity.class);
+                            startActivity(intent);
                             finish();
                         } else {                                                                   // 다른 값이 들어왔을 때.
                             Log.i("DriverCallCheckActivity", "AcceptTask에서 예상치 못한 값이 넘어옴.");

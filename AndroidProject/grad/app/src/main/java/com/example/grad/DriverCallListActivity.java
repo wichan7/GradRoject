@@ -119,6 +119,7 @@ public class DriverCallListActivity extends AppCompatActivity {
             intent.putExtra("addr", array_calls.get(position).addr);
             intent.putExtra("time", array_calls.get(position).time);
             startActivity(intent);
+            finish();
             /*
             String s = array_calls.get(position).no;
             Toast.makeText(DriverCallListActivity.this, "아답터position:" + position + "해당 array의 cno:" + s, Toast.LENGTH_SHORT).show();

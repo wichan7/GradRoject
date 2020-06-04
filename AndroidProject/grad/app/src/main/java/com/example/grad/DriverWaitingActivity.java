@@ -191,6 +191,8 @@ public class DriverWaitingActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     Toast.makeText(DriverWaitingActivity.this,"콜을 취소하셨습니다.",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(DriverWaitingActivity.this, DriverCallListActivity.class);
+                    startActivity(intent);
                     finish();
                     break;
             }

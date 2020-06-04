@@ -433,6 +433,8 @@ public class ShowPassengersLocationActivity extends AppCompatActivity implements
                             String resPrimary = st.nextToken();
 
                             if (resPrimary.equals("callEnd")) {                                    //기사 승객 모두 boolean값이 true일 때.
+                                Intent intent = new Intent(ShowPassengersLocationActivity.this, DriverCallListActivity.class);
+                                startActivity(intent);
                                 finish();
                             } else if (resPrimary.equals("callNotEnd")) {                         //기사 승객의 boolean값이 하나라도 false일 때.
                                 Double slocLat = Double.parseDouble(st.nextToken());

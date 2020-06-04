@@ -100,7 +100,7 @@ public class PassengerLoginActivity extends AppCompatActivity {
                             editor.putString("id",loginid);
                             editor.commit();
                             Toast.makeText(PassengerLoginActivity.this, getString(R.string.success), Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(PassengerLoginActivity.this, PassengerCallActivity.class);
+                            Intent intent = new Intent(PassengerLoginActivity.this, PassengerShortcutActivity.class);
                             startActivity(intent);
                             finish();
                         } else if (result.equals("pwdNotEquals")) {
