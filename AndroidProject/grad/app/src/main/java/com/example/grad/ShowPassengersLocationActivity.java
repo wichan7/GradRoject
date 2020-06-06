@@ -59,7 +59,7 @@ public class ShowPassengersLocationActivity extends AppCompatActivity implements
 
     Button btn_accept = null;
     private String cno;                               // 전 intent에서 넘어온 callnumber
-    private Timer myTimer;                              // 5초마다 실행시키기 위해 Timer 선언
+    private Timer myTimer;                            // 5초마다 실행시키기 위해 Timer 선언
     private TimerTask myTimerTask;
 
     private Marker passengerLocMarker = null;

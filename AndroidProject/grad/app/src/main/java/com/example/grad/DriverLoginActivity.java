@@ -85,6 +85,44 @@ public class DriverLoginActivity extends AppCompatActivity {
         }
     }
 
+    class CheckLicense extends AsyncTask<String, Void, String> {
+        String sendMsg, receiveMsg;
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                String str, str_url;
+                str_url = "http://"+ Gloval.ip +":8080/highquick/checkLicense.jsp";
+                URL url = new URL(str_url);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                conn.setRequestMethod("POST");
+                OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
+                sendMsg = "id=" + strings[0];
+                osw.write(sendMsg);
+                osw.flush();
+                if (conn.getResponseCode() == conn.HTTP_OK) {
+                    InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "EUC-KR");
+                    BufferedReader reader = new BufferedReader(tmp);
+                    StringBuffer buffer = new StringBuffer();
+                    while ((str = reader.readLine()) != null) {
+                        buffer.append(str);
+                    }
+                    receiveMsg = buffer.toString();
+
+                } else {
+                    Log.i("통신 결과", conn.getResponseCode() + "에러");
+                }
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return receiveMsg;
+        }
+    }
+
     View.OnClickListener btnListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) { // View 클래스가 Button, EditText...etc들의 최상위 클래스임
@@ -99,9 +137,16 @@ public class DriverLoginActivity extends AppCompatActivity {
                             editor.putString("id",loginid);
                             editor.commit();
                             Toast.makeText(DriverLoginActivity.this, getString(R.string.success), Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(DriverLoginActivity.this, DriverLicenseActivity.class);
-                            startActivity(intent);
-                            finish();
+                            String result2 = new CheckLicense().execute(loginid).get();
+                            if (result2.equals("success")){
+                                Intent intent = new Intent(DriverLoginActivity.this, DriverCallListActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }else if (result2.equals("nullLicense")){
+                                Intent intent = new Intent(DriverLoginActivity.this, DriverLicenseActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
                         } else if (result.equals("pwdNotEquals")) {
                             Toast.makeText(DriverLoginActivity.this, getString(R.string.pwdNotEquals), Toast.LENGTH_SHORT).show();
                             et_id.setText("");

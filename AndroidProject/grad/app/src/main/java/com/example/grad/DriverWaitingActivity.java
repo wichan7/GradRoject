@@ -72,6 +72,8 @@ public class DriverWaitingActivity extends AppCompatActivity {
 
                         if (status == -1) {                                                                // -1: 콜이 종료된 상태
                             Toast.makeText(DriverWaitingActivity.this, "종료된 콜입니다.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(DriverWaitingActivity.this, DriverCallListActivity.class);
+                            startActivity(intent);
                             finish();
                         }else if (status == 1){                                                           // 1: 기사만 수락한 상태
                             //TODO: 기다릴때 뭐 뱅글뱅글 도는 로딩창같은거 넣으면 좋을듯
