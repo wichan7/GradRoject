@@ -59,7 +59,7 @@ public class ShowPassengersLocationActivity extends AppCompatActivity implements
 
     Button btn_accept = null;
     private String cno;                               // 전 intent에서 넘어온 callnumber
-    private Timer myTimer;                            // 5초마다 실행시키기 위해 Timer 선언
+    private Timer myTimer;                              // 5초마다 실행시키기 위해 Timer 선언
     private TimerTask myTimerTask;
 
     private Marker passengerLocMarker = null;
@@ -526,7 +526,7 @@ public class ShowPassengersLocationActivity extends AppCompatActivity implements
         String sendMsg, receiveMsg;
 
         @Override
-        protected String doInBackground(String... strings) { //id, slocString, slocLat, slocLong, sdestLat, sdestLong 으로 6개가 필요
+        protected String doInBackground(String... strings) {
             try {
                 String str, str_url;
                 str_url = "http://" + Gloval.ip + ":8080/highquick/showLocTask.jsp";

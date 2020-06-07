@@ -435,6 +435,7 @@ public class ShowDriversLocationActivity extends AppCompatActivity implements On
 
                             if (resPrimary.equals("callEnd")){                                    //기사 승객 모두 boolean값이 true일 때.
                                 Intent intent = new Intent(ShowDriversLocationActivity.this, DriverFeedback.class);
+                                intent.putExtra("cno",(String)cno);
                                 startActivity(intent);
                                 finish();
                             }

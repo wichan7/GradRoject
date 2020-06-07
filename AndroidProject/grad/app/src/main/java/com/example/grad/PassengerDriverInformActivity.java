@@ -54,6 +54,7 @@ public class PassengerDriverInformActivity extends AppCompatActivity {
                 tv_phone.setText(st.nextToken());
                 tv_count.setText(st.nextToken());
                 tv_rating.setText(st.nextToken());
+                tv_car.setText(st.nextToken());
             }
         } catch (ExecutionException e) {
             e.printStackTrace();
