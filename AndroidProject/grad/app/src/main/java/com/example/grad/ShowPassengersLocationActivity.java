@@ -61,6 +61,7 @@ public class ShowPassengersLocationActivity extends AppCompatActivity implements
     private String cno;                               // 전 intent에서 넘어온 callnumber
     private Timer myTimer;                              // 5초마다 실행시키기 위해 Timer 선언
     private TimerTask myTimerTask;
+    private boolean cameraMoved = false;
 
     private Marker passengerLocMarker = null;
     private Marker passengerDestMarker = null;
@@ -465,6 +466,11 @@ public class ShowPassengersLocationActivity extends AppCompatActivity implements
                                 passengerDestMarker = mMap.addMarker(pdest);
                                 // passenger Destination Marker End
 
+                                if (cameraMoved == false){
+                                    cameraMoved = true;
+                                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(passengerLocMarker.getPosition(), 15);
+                                    mMap.moveCamera(cameraUpdate);
+                                }
                             }
                         }else{
                             Log.i("passengersLocation","currentloc이 없음");

@@ -63,6 +63,7 @@ public class ShowDriversLocationActivity extends AppCompatActivity implements On
     private TimerTask myTimerTask;
 
     private Marker driverLocMarker = null;
+    private boolean cameraMoved = false;
 
     //region GPS를 위한 변수선언부
     private GoogleMap mMap = null;
@@ -458,6 +459,11 @@ public class ShowDriversLocationActivity extends AppCompatActivity implements On
                                 driverLocMarker = mMap.addMarker(dloc);
                                 // driver Location Marker End
 
+                                if (cameraMoved == false){
+                                    cameraMoved = true;
+                                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(driverLocMarker.getPosition(), 15);
+                                    mMap.moveCamera(cameraUpdate);
+                                }
                             }
                         }else{
                             Log.i("driversLocation","currentloc이 없음");
