@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -57,6 +58,12 @@ public class DriverCallListActivity extends AppCompatActivity {
         mListView = (ListView) findViewById(R.id.list_calls);
         mListView.setOnItemClickListener(myOnItemClickListener);
         //ListView에 레이아웃 연결과 리스너 연결
+
+        // 2020/06/09 수정됨
+        array_calls = new ArrayList<CallListItem>();
+        myCallListViewAdapter = new CallListViewAdapter(mContext, array_calls);
+        mListView.setAdapter(myCallListViewAdapter);
+        //어댑터 만들고 연결.
 
         myTimer = new Timer();
         myTimerTask = new MyTimerTask();
@@ -136,7 +143,7 @@ public class DriverCallListActivity extends AppCompatActivity {
                 String result = new GetCallListTask().execute().get(); //result에 no&slocString&calltime 이렇게 묶여서 들어옴
 
                 // array_calls 초기화
-                array_calls = new ArrayList<>();
+                array_calls.clear();
                 StringTokenizer st = new StringTokenizer(result, "&");
                 while (st.hasMoreTokens()) {
                     String no = st.nextToken();
@@ -162,18 +169,22 @@ public class DriverCallListActivity extends AppCompatActivity {
                     CallListItem cli = new CallListItem(no, slocString, Long.toString(resultcallTime)+"분 전");
                     array_calls.add(cli);
                 }
+                // array_calls 초기화 끝
 
                 // 메인쓰레드가 아닌곳에서 UI변경을 할 수 없으므로 runOnUI를 이용해서 변경
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        // 2020/06/09 수정됨
+                        myCallListViewAdapter.notifyDataSetChanged();
+                        /*
                         myCallListViewAdapter = null;
                         mListView.setAdapter(null);
                         myCallListViewAdapter = new CallListViewAdapter(mContext, array_calls);
                         mListView.setAdapter(myCallListViewAdapter);
+                         */
                     }
-                });
-                //RunOnUI end
+                });//RunOnUI end
 
             } catch (ExecutionException e) {
                 e.printStackTrace();
