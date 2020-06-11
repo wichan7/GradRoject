@@ -3,14 +3,19 @@ package com.example.grad;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -58,9 +63,13 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
     private GoogleMap mMap = null;
     private Geocoder geocoder = null;
     private EditText et_search = null;
-    private Button btn_search = null, btn_call = null;
+    private Button btn_search = null, btn_call = null, btn_menu = null;
     private Marker destMarker = null; //목적지마커는 항상 한개로 유지되어야하므로 destMarker로 관리
     private SharedPreferences pref;
+
+    //메뉴버튼을 위한 멤버변수
+    DrawerLayout drawerLayout;
+    ConstraintLayout sideView;
 
     //region GPS를 위한 변수선언부
 
@@ -86,8 +95,15 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_call);
 
+        drawerLayout = findViewById(R.id.dl_main);
+        sideView = findViewById(R.id.sideView);
+
+        btn_menu = findViewById(R.id.btn_menu);
+        btn_menu.setOnClickListener(myOnClickListener);
+
         btn_search = findViewById(R.id.btn_search); //onClickListener는 onMapReady에서 달아줌
         et_search = findViewById(R.id.et_search);
+
         btn_call = findViewById(R.id.btn_call);
         btn_call.setOnClickListener(myOnClickListener);
 
@@ -228,6 +244,15 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
         super.onStop();
         if (mFusedLocationClient != null) {
             mFusedLocationClient.removeLocationUpdates(locationCallback);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(sideView)) {
+            drawerLayout.closeDrawer(sideView);
+        } else {
+            super.onBackPressed();
         }
     }
 
@@ -417,6 +442,10 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
         @Override
         public void onClick(View v) {
             switch(v.getId()){
+                case R.id.btn_menu: //메뉴버튼 누를때
+                    drawerLayout.openDrawer(GravityCompat.START);
+                    break;
+
                 case R.id.btn_search:
                     if (destMarker != null) destMarker.remove();
 
@@ -440,16 +469,11 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
 
                         // 좌표(위도, 경도) 생성
                         LatLng point = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
-                        // 마커 생성
-                        MarkerOptions mOptions2 = new MarkerOptions();
-                        mOptions2.title("search result");
-                        mOptions2.snippet(address);
-                        mOptions2.position(point);
                         // 마커 추가
-                        destMarker = mMap.addMarker(mOptions2);
-
+                        setDestMarker(point);
                         // 해당 좌표로 화면 줌
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(point,15));
+                        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(point,mMap.getCameraPosition().zoom));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(point,mMap.getCameraPosition().zoom));
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -496,6 +520,7 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
                     }
 
                     break;
+
             }
         }
     }; //myOnClickListener 구현
@@ -504,23 +529,7 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
     GoogleMap.OnMapClickListener myOnMapClickListener = new GoogleMap.OnMapClickListener(){
         @Override
         public void onMapClick(LatLng point) {
-            MarkerOptions mOptions = new MarkerOptions();
-            // 마커 타이틀
-            mOptions.title("마커 좌표");
-            Double latitude = point.latitude; // 위도
-            Double longitude = point.longitude; // 경도
-            // 마커의 스니펫(간단한 텍스트) 설정
-            mOptions.snippet(latitude.toString() + ", " + longitude.toString());
-            // LatLng: 위도 경도 쌍을 나타냄
-            mOptions.position(new LatLng(latitude, longitude));
-
-            // 마커(핀) 추가
-            if (destMarker == null) //아직 목적지마커가 없는경우
-                destMarker = mMap.addMarker(mOptions);
-            else { //목적지 마커가 있는경우
-                destMarker.remove(); //원래있던 마커 삭제
-                destMarker = mMap.addMarker(mOptions);
-            }
+            setDestMarker(point);
         }
     }; //myOnMapClickListener 구현
     //endregion
@@ -566,4 +575,36 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
     }
     //endregion
 
+    public void setDestMarker(LatLng latlng){
+        MarkerOptions mOptions = new MarkerOptions();
+        // 마커 타이틀
+        //mOptions.title("목적지");
+        // LatLng: 위도 경도 쌍을 나타냄
+        mOptions.position(latlng);
+        /* 목적지 주소를 얻는 코드. 필요없어서 주석처리
+        //목적지 주소 검색
+        List<Address> addressList = null;
+        try {
+            addressList = geocoder.getFromLocation(latlng.latitude, latlng.longitude, 10);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // 콤마를 기준으로 split
+        String []splitStr = addressList.get(0).toString().split(",");
+        String address = splitStr[0].substring(splitStr[0].indexOf("\"") + 1,splitStr[0].length() - 2); // 주소
+        */
+        // 마커 간단한 정보 넣기
+        //mOptions.snippet(address);
+
+        Bitmap destImage = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.destmarker), 256, 256, false);
+        mOptions.icon(BitmapDescriptorFactory.fromBitmap(destImage));
+        mOptions.draggable(true);
+        // 마커(핀) 추가
+        if (destMarker == null) //아직 목적지마커가 없는경우
+            destMarker = mMap.addMarker(mOptions);
+        else { //목적지 마커가 있는경우
+            destMarker.remove(); //원래있던 마커 삭제
+            destMarker = mMap.addMarker(mOptions);
+        }
+    }
 }

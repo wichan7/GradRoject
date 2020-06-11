@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DriverShortcutActivity"></activity>
+        <activity android:name=".PassengerMain"></activity>
+        <activity android:name=".DriverShortcutActivity" />
         <activity android:name=".PassengerShortcutActivity" />
         <activity
             android:name=".SplashActivity"

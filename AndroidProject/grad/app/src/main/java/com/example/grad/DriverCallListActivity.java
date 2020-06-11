@@ -7,10 +7,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,6 +40,11 @@ public class DriverCallListActivity extends AppCompatActivity {
     private Timer myTimer;                              // 5초마다 실행시키기 위해 Timer 선언
     private TimerTask myTimerTask;
 
+    //메뉴버튼을 위한 멤버변수
+    DrawerLayout drawerLayout;
+    ConstraintLayout sideView;
+    Button btn_menu;
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -48,12 +57,25 @@ public class DriverCallListActivity extends AppCompatActivity {
         setListOnOff(true);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(sideView)) {
+            drawerLayout.closeDrawer(sideView);
+        } else {
+            super.onBackPressed();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_call_list);
         this.mContext = getApplicationContext();
+
+        drawerLayout = findViewById(R.id.dl_main);
+        sideView = findViewById(R.id.sideView);
+        btn_menu = findViewById(R.id.btn_menu);
+        btn_menu.setOnClickListener(new MyOnClickListener());
 
         mListView = (ListView) findViewById(R.id.list_calls);
         mListView.setOnItemClickListener(myOnItemClickListener);
@@ -134,6 +156,17 @@ public class DriverCallListActivity extends AppCompatActivity {
         }
     };
     //endregion
+
+    class MyOnClickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            switch(v.getId()){
+                case R.id.btn_menu:
+                    drawerLayout.openDrawer(GravityCompat.START);
+                    break;
+            }
+        }
+    }
 
     class MyTimerTask extends TimerTask {
         @Override
