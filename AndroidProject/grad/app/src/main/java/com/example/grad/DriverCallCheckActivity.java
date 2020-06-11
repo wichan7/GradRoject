@@ -232,57 +232,57 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
         float setZoom = 0;
         if (375 < mid_distance && mid_distance < 750) {
             if (mid_distance < (375 + 750) / 2) {
-                setZoom = 17f;
+                setZoom = 16f + 0.8f;
             } else {
-                setZoom = 16f + 0.5f;
+                setZoom = 16f + 0.3f;
             }
         } else if (750 < mid_distance && mid_distance < 1500) {
             if (mid_distance < (750 + 1500) / 2) {
-                setZoom = 16f;
+                setZoom = 15f + 0.8f;
             } else {
-                setZoom = 15f + 0.5f;
+                setZoom = 15f + 0.3f;
             }
         } else if (1500 < mid_distance && mid_distance < 3000) {
             if (mid_distance < (1500 + 3000) / 2) {
-                setZoom = 15f;
+                setZoom = 14f + 0.8f;
             } else {
-                setZoom = 14f + 0.5f;
+                setZoom = 14f + 0.3f;
             }
         } else if (3000 < mid_distance && mid_distance < 6000) {
             if (mid_distance < (3000 + 6000) / 2) {
-                setZoom = 14f;
+                setZoom = 13f + 0.8f;
             } else {
-                setZoom = 13f + 0.5f;
+                setZoom = 13f + 0.3f;
             }
         } else if (6000 < mid_distance && mid_distance < 12000) {
             if (mid_distance < (6000 + 12000) / 2) {
-                setZoom = 13f;
+                setZoom = 12f + 0.8f;
             } else {
-                setZoom = 12f + 0.5f;
+                setZoom = 12f + 0.3f;
             }
         } else if (12000 < mid_distance && mid_distance < 24000) {
             if (mid_distance < (12000 + 24000) / 2) {
-                setZoom = 12f;
+                setZoom = 11f + 0.8f;
             } else {
-                setZoom = 11f + 0.5f;
+                setZoom = 11f + 0.3f;
             }
         } else if (24000 < mid_distance && mid_distance < 48000) {
             if (mid_distance < (24000 + 48000) / 2) {
-                setZoom = 11f;
+                setZoom = 10f + 0.8f;
             } else {
-                setZoom = 10f + 0.5f;
+                setZoom = 10f + 0.3f;
             }
         } else if (48000 < mid_distance && mid_distance < 96000) {
             if (mid_distance < (48000 + 96000) / 2) {
-                setZoom = 10f;
+                setZoom = 9f + 0.8f;
             } else {
-                setZoom = 9f + 0.5f;
+                setZoom = 9f + 0.3f;
             }
         } else if (96000 < mid_distance && mid_distance < 192000) {
             if (mid_distance < (96000 + 192000) / 2) {
-                setZoom = 9f;
+                setZoom = 8f + 0.8f;
             } else {
-                setZoom = 8f + 0.5f;
+                setZoom = 8f + 0.3f;
             }
         }
         return setZoom;
