@@ -598,7 +598,6 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
 
         Bitmap destImage = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.destmarker), 256, 256, false);
         mOptions.icon(BitmapDescriptorFactory.fromBitmap(destImage));
-        mOptions.draggable(true);
         // 마커(핀) 추가
         if (destMarker == null) //아직 목적지마커가 없는경우
             destMarker = mMap.addMarker(mOptions);
@@ -606,5 +605,6 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
             destMarker.remove(); //원래있던 마커 삭제
             destMarker = mMap.addMarker(mOptions);
         }
+        destMarker.setDraggable(true);
     }
 }
