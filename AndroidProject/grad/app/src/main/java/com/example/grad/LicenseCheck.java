@@ -5,8 +5,6 @@ import java.net.*;
 
 /*
  * LicenseCode를 검사하는 클래스입니다.
- * 라이센스를 검사하고 html을 가져오는 코드는 작성된 상태입니다.
- * 가져온 html에서 결과를 파싱하여 LicenseCheck.SUCCESS 또는 LicenseCheck.FAIL을 리턴하는 코드를 작성해주세요!
  */
 public class LicenseCheck {
 	

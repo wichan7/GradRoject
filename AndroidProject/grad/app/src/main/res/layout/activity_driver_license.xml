@@ -7,12 +7,33 @@
     tools:context=".DriverLicenseActivity">
 
     <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="이름"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_name" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="차량번호"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_name"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="@+id/et_name" />
+
+    <TextView
         android:id="@+id/textView6"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
         android:text="라이센스 번호는 인증 과정에만 사용되며 서버에 수집되지 않습니다."
         android:textColor="#F80909"
         android:textSize="20sp"
@@ -23,14 +44,15 @@
     <Button
         android:id="@+id/btn_submit"
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/border_layout"
         android:backgroundTint="@color/colorDarkBlue"
         android:text="제출"
         android:textColor="#ffffff"
-        android:textSize="20dp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,17 +62,16 @@
         android:id="@+id/et_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="이름"
         android:inputType="textPersonName"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView13"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <EditText
@@ -61,8 +82,9 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="5dp"
         android:ems="10"
-        android:hint="생년월일 8자리 예)19990909"
-        android:inputType="textPersonName"
+        android:hint="생년월일 8자리 예)19990108"
+        android:inputType="number"
+        android:maxLength="8"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -78,8 +100,9 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="5dp"
         android:ems="10"
-        android:hint="라이선스 번호(-표시제외)"
-        android:inputType="textPersonName"
+        android:hint="라이선스 번호 12자리 (-표시제외) "
+        android:inputType="number"
+        android:maxLength="12"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -91,31 +114,42 @@
         android:id="@+id/et_carnum"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="차량번호 예)123가 5678"
         android:inputType="textPersonName"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_license" />
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toTopOf="@+id/et_name" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
+        app:layout_constraintGuide_percent="0.2" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="206dp" />
+        app:layout_constraintGuide_percent="0.4" />
+
+    <Button
+        android:id="@+id/btn_submit_test"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/border_layout"
+        android:backgroundTint="@color/colorWhite"
+        android:text="면허인증없이 진행(디버그용)"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintBottom_toTopOf="@+id/btn_submit"
+        app:layout_constraintEnd_toEndOf="@+id/btn_submit"
+        app:layout_constraintStart_toStartOf="@+id/guideline3" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
