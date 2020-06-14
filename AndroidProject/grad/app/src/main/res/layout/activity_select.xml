@@ -12,13 +12,19 @@
         android:id="@+id/btn_PassengerLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="승객 로그인" />
+        android:text="승객 로그인"
+        android:textSize="20sp"
+        android:textColor="#473C3C"
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/btn_DriverLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="기사 로그인" />
+        android:text="기사 로그인"
+        android:textSize="20sp"
+        android:textColor="#473C3C"
+        android:textStyle="bold"/>
 
   <fragment
         android:layout_width="match_parent"
