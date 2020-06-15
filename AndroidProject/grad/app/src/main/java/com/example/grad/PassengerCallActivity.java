@@ -596,7 +596,7 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
         // 마커 간단한 정보 넣기
         //mOptions.snippet(address);
 
-        Bitmap destImage = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.destmarker), 256, 256, false);
+        Bitmap destImage = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.destmarker), 170, 170, false);
         mOptions.icon(BitmapDescriptorFactory.fromBitmap(destImage));
         // 마커(핀) 추가
         if (destMarker == null) //아직 목적지마커가 없는경우

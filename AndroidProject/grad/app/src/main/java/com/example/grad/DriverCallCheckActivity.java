@@ -176,11 +176,14 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
             sdestMarker.title("승객의 목적지");
             sdestMarker.snippet("승객의 목적지입니다.");
             //마커 사진넣기 + 사이즈 조정 false일때 사이즈 크기가 변동안됨 / true는 작은걸 확대시키는데 Out of Memory 발생
-            Bitmap c = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.t_pic), 50, 50, false);
-            sdestMarker.icon(BitmapDescriptorFactory.fromBitmap(c));
+            Bitmap locImage = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.locmarker), 170, 170, false);
+            slocMarker.icon(BitmapDescriptorFactory.fromBitmap(locImage));
+            Bitmap destImage = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.destmarker), 170, 170, false);
+            sdestMarker.icon(BitmapDescriptorFactory.fromBitmap(destImage));
+
 
             //sdestMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));//마커색깔 변경용
-            slocMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+            //slocMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
             //TODO: 마커 색상 변경(승객위치와 목적지 구분을 위해)
             mMap.addMarker(slocMarker);
             mMap.addMarker(sdestMarker);
@@ -201,11 +204,11 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
             Log.d("Location_", "X : " + mid_x + " Y : " + mid_y);
             LatLng Mid_loc = new LatLng(mid_x, mid_y);
             //////////////////////////////////////////////////////////////////////////////////////////
-            MarkerOptions smidMarker = new MarkerOptions();//가운데 위치 확인용
+            /*MarkerOptions smidMarker = new MarkerOptions();//가운데 위치 확인용
             smidMarker.position(Mid_loc);
             smidMarker.title("가운데의 위치");
             smidMarker.snippet("가운데의 위치입니다.");
-            mMap.addMarker(smidMarker);
+            mMap.addMarker(smidMarker);*/
 
             ////////////////추가로 계산예정///////////////////////////////////////////////////////////
 
