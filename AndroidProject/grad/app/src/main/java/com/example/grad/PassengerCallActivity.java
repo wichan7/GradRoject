@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -63,6 +64,7 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
     private GoogleMap mMap = null;
     private Geocoder geocoder = null;
     private EditText et_search = null;
+    private TextView tv_welcome = null;
     private Button btn_search = null, btn_call = null, btn_menu = null;
     private Marker destMarker = null; //목적지마커는 항상 한개로 유지되어야하므로 destMarker로 관리
     private SharedPreferences pref;
@@ -94,6 +96,11 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_call);
+        pref = getSharedPreferences(Gloval.PREFERENCE, MODE_PRIVATE);
+
+        tv_welcome = findViewById(R.id.tv_welcome);
+        String id = pref.getString("id","");
+        tv_welcome.setText(id+"님\n반갑습니다.");
 
         drawerLayout = findViewById(R.id.dl_main);
         sideView = findViewById(R.id.sideView);
@@ -109,7 +116,7 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map); // selectActivity.xml에 있는 fragment의 id를 통해 mapFragment를 찾아 연결
         mapFragment.getMapAsync(this); // getMapAsync가 호출되면 onMapReady 콜백이 실행됨.
-        pref = getSharedPreferences(Gloval.PREFERENCE, MODE_PRIVATE);
+
 
         //region GPS를 위한 코드
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

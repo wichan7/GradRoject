@@ -2,6 +2,7 @@ package com.example.grad;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,11 +41,13 @@ public class DriverCallListActivity extends AppCompatActivity {
     private ArrayList<CallListItem> array_calls;        // CallListItem은 String addr, String time으로 이루어진 클래스
     private Timer myTimer;                              // 5초마다 실행시키기 위해 Timer 선언
     private TimerTask myTimerTask;
+    private SharedPreferences pref;
 
     //메뉴버튼을 위한 멤버변수
     DrawerLayout drawerLayout;
     ConstraintLayout sideView;
     Button btn_menu;
+    TextView tv_welcome;
 
     @Override
     protected void onPause() {
@@ -71,11 +75,17 @@ public class DriverCallListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_call_list);
         this.mContext = getApplicationContext();
+        pref = getSharedPreferences(Gloval.PREFERENCE, MODE_PRIVATE);
 
         drawerLayout = findViewById(R.id.dl_main);
         sideView = findViewById(R.id.sideView);
+
         btn_menu = findViewById(R.id.btn_menu);
         btn_menu.setOnClickListener(new MyOnClickListener());
+
+        tv_welcome = findViewById(R.id.tv_welcome);
+        String id = pref.getString("id","");
+        tv_welcome.setText(id+"님\n반갑습니다.");
 
         mListView = (ListView) findViewById(R.id.list_calls);
         mListView.setOnItemClickListener(myOnItemClickListener);
