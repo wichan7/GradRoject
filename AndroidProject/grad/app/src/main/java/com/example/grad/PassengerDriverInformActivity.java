@@ -61,6 +61,13 @@ public class PassengerDriverInformActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        //////////////////////////////////////
+        Intent intent = getIntent();
+        String time = intent.getExtras().getString("time");
+        Log.d("time_", "time : " + time);
+        tv_time.setText(time + "분");
+        //////////////////////////////////////
+
     }
 
     //region DB연동코드

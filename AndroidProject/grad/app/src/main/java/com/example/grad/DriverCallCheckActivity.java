@@ -210,8 +210,12 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
             smidMarker.snippet("가운데의 위치입니다.");
             mMap.addMarker(smidMarker);*/
 
-            ////////////////추가로 계산예정///////////////////////////////////////////////////////////
-
+            ////////////////추가로 계산예정///////////////////////////////////////////////////////////6월20일 실수
+            int need_time = getTime(mid_distance);//일단 여기다 만들었음 소요시간
+            String time = String.valueOf(need_time);
+            Intent intent = new Intent(DriverCallCheckActivity.this, PassengerDriverInformActivity.class);
+            intent.putExtra("time" , time);
+            //////////////////////////////////////////////////////////////////////////////////////////////////
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(Mid_loc, getZoomLevel(mid_distance));
             mMap.moveCamera(cameraUpdate);
         } catch (ExecutionException e) {
@@ -289,6 +293,66 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
             }
         }
         return setZoom;
+    }
+    public int getTime(double mid_distance){
+        int time = 0;
+
+        if (375 < mid_distance && mid_distance < 750) {
+            if (mid_distance < (375 + 750) / 2) {
+                time = 2;
+            } else {
+                time = 2;
+            }
+        } else if (750 < mid_distance && mid_distance < 1500) {
+            if (mid_distance < (750 + 1500) / 2) {
+                time = 4;
+            } else {
+                time = 6;
+            }
+        } else if (1500 < mid_distance && mid_distance < 3000) {
+            if (mid_distance < (1500 + 3000) / 2) {
+                time = 7;
+            } else {
+                time = 11;
+            }
+        } else if (3000 < mid_distance && mid_distance < 6000) {
+            if (mid_distance < (3000 + 6000) / 2) {
+                time = 15;
+            } else {
+                time = 20;
+            }
+        } else if (6000 < mid_distance && mid_distance < 12000) {
+            if (mid_distance < (6000 + 12000) / 2) {
+                time = 35;
+            } else {
+                time = 50;
+            }
+        } else if (12000 < mid_distance && mid_distance < 24000) {
+            if (mid_distance < (12000 + 24000) / 2) {
+                time = 75;
+            } else {
+                time = 100;
+            }
+        } else if (24000 < mid_distance && mid_distance < 48000) {
+            if (mid_distance < (24000 + 48000) / 2) {
+                time = 135;
+            } else {
+                time = 170;
+            }
+        } else if (48000 < mid_distance && mid_distance < 96000) {
+            if (mid_distance < (48000 + 96000) / 2) {
+                time = 215;
+            } else {
+                time = 250;
+            }
+        } else if (96000 < mid_distance && mid_distance < 192000) {
+            if (mid_distance < (96000 + 192000) / 2) {
+                time = 305;
+            } else {
+                time = 360;
+            }
+        }
+        return time;
     }
 
     //region GPS를 위한 코드
