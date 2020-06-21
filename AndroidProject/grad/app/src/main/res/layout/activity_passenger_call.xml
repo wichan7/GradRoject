@@ -41,10 +41,10 @@
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:ems="10"
             android:background="@drawable/border_layout"
-            android:gravity="center"
             android:backgroundTint="#F8F8F8"
+            android:ems="10"
+            android:gravity="center"
             android:inputType="text"
             app:layout_constraintBottom_toBottomOf="@+id/btn_search"
             app:layout_constraintEnd_toStartOf="@+id/btn_search"
@@ -58,11 +58,11 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/border_layout"
+            android:backgroundTint="#F8F8F8"
             android:text="검색"
+            android:textColor="#473C3C"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="#473C3C"
-            android:backgroundTint="#F8F8F8"
             app:layout_constraintBottom_toTopOf="@+id/btn_call"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -76,12 +76,23 @@
             android:background="@drawable/border_layout"
             android:backgroundTint="#F8F8F8"
             android:text="기사 부르기"
-            android:textSize="20sp"
             android:textColor="#473C3C"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <CheckBox
+            android:id="@+id/cb_isQuick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/border_layout"
+            android:text=" 퀵으로 부르기  "
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/et_search"
+            app:layout_constraintStart_toStartOf="@+id/et_search" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -97,31 +108,31 @@
             android:id="@+id/btn_modify"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="개인정보 수정"
             android:background="@drawable/border_layout"
-            app:layout_constraintTop_toTopOf="@id/guideline12"
+            android:text="개인정보 수정"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="@id/guideline12" />
 
         <Button
             android:id="@+id/btn_history"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="콜 내역 보기"
             android:background="@drawable/border_layout"
-            app:layout_constraintTop_toBottomOf="@id/btn_modify"
+            android:text="콜 내역 보기"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/btn_modify" />
 
         <Button
             android:id="@+id/btn_exit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="종료하기"
             android:background="@drawable/border_layout"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="종료하기"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/tv_welcome"
@@ -143,7 +154,7 @@
             android:background="@drawable/dotted_line_horizontal"
             android:layerType="software"
             app:layout_constraintBottom_toTopOf="@id/guideline12"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline12"

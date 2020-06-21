@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -35,6 +37,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -456,6 +459,8 @@ public class ShowDriversLocationActivity extends AppCompatActivity implements On
                                 dloc.position(new LatLng(glocLat, glocLong));
                                 dloc.title("기사의 위치");
                                 dloc.snippet("기사의 위치입니다.");
+                                Bitmap locImage1 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.taxidriver), 100, 100, false);
+                                dloc.icon(BitmapDescriptorFactory.fromBitmap(locImage1));
                                 driverLocMarker = mMap.addMarker(dloc);
                                 // driver Location Marker End
 

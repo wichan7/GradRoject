@@ -190,8 +190,15 @@ public class DriverCallListActivity extends AppCompatActivity {
                 StringTokenizer st = new StringTokenizer(result, "&");
                 while (st.hasMoreTokens()) {
                     String no = st.nextToken();
+                    String sisQuick = st.nextToken();
                     String slocString = st.nextToken();
                     String calltime = st.nextToken();
+                    Boolean isQuick = Boolean.parseBoolean(sisQuick);
+                    if (isQuick){
+                        sisQuick = "퀵";
+                    } else {
+                        sisQuick = "택시";
+                    }
 
                     Calendar nowTime = Calendar.getInstance();
                     Date nowTimefo = null;
@@ -209,7 +216,7 @@ public class DriverCallListActivity extends AppCompatActivity {
                     long callTime = nowTimefo.getTime() - callTimefo.getTime();
                     long resultcallTime = callTime / (60 * 1000);
 
-                    CallListItem cli = new CallListItem(no, slocString, Long.toString(resultcallTime)+"분 전");
+                    CallListItem cli = new CallListItem(no, sisQuick, slocString, Long.toString(resultcallTime)+"분 전");
                     array_calls.add(cli);
                 }
                 // array_calls 초기화 끝

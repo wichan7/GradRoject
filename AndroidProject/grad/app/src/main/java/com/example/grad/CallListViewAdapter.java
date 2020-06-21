@@ -46,6 +46,7 @@ public class CallListViewAdapter extends BaseAdapter {
             mViewHolder = (ViewHolder) convertView.getTag();
         }
         // View에 Data 세팅
+        mViewHolder.tv_isQuick.setText(array_calls.get(position).isQuick); //해야함
         mViewHolder.tv_addr.setText(array_calls.get(position).addr); //해야함
         mViewHolder.tv_time.setText(array_calls.get(position).time); //해야함
 
@@ -53,10 +54,12 @@ public class CallListViewAdapter extends BaseAdapter {
     }
 
     public class ViewHolder {
+        private TextView tv_isQuick;
         private TextView tv_addr;
         private TextView tv_time;
 
         public ViewHolder(View convertView){
+            tv_isQuick = (TextView) convertView.findViewById(R.id.tv_isQuick);
             tv_addr = (TextView)convertView.findViewById(R.id.tv_addr);
             tv_time = (TextView)convertView.findViewById(R.id.tv_time);
         }

@@ -61,6 +61,7 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
     private Button btn_accept = null;               // 수락 버튼
     private LatLng sLoc, sDest;                      // 승객 위치와 승객 목적지를 담을 변수
     private String cno;                               // 전 intent에서 넘어온 callnumber
+    private int need_time;                          // 소요시간 값 넘겨줌
 
     //region GPS를 위한 변수선언부
     private GoogleMap mMap = null;
@@ -211,7 +212,7 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
             mMap.addMarker(smidMarker);*/
 
             ////////////////추가로 계산예정///////////////////////////////////////////////////////////6월20일 실수
-            int need_time = getTime(mid_distance);//일단 여기다 만들었음 소요시간
+            need_time = getTime(mid_distance);//일단 여기다 만들었음 소요시간
             String time = String.valueOf(need_time);
             Intent intent = new Intent(DriverCallCheckActivity.this, PassengerDriverInformActivity.class);
             intent.putExtra("time" , time);
@@ -600,9 +601,10 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
                     String id = pref.getString("id", "");
                     String glocLat = Double.toString(currentPosition.latitude);
                     String glocLong = Double.toString(currentPosition.longitude);
+                    String str_need_time = Integer.toString(need_time);
 
                     try {
-                        String result = new AcceptTask().execute(cno, id, glocLat, glocLong).get();
+                        String result = new AcceptTask().execute( cno, id, glocLat, glocLong, str_need_time ).get();
                         if (result.equals("success")) {                                           // 성공적으로 콜을 잡은경우
                             Intent intent = new Intent(DriverCallCheckActivity.this, DriverWaitingActivity.class);
                             intent.putExtra("cno", Integer.parseInt(cno));
@@ -637,7 +639,7 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
         String sendMsg, receiveMsg;
 
         @Override
-        protected String doInBackground(String... strings) { //id, slocString, slocLat, slocLong, sdestLat, sdestLong 으로 6개가 필요
+        protected String doInBackground(String... strings) {
             try {
                 String str, str_url;
                 str_url = "http://" + Gloval.ip + ":8080/highquick/getLocData.jsp";
@@ -686,7 +688,7 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
                 conn.setRequestMethod("POST");
                 OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
                 //URL연결, 출력스트림 초기화
-                sendMsg = "cno=" + strings[0] + "&id=" + strings[1] + "&glocLat=" + strings[2] + "&glocLong=" + strings[3];
+                sendMsg = "cno=" + strings[0] + "&id=" + strings[1] + "&glocLat=" + strings[2] + "&glocLong=" + strings[3] + "&estTime=" + strings[4];
                 osw.write(sendMsg);
                 osw.flush();
                 if (conn.getResponseCode() == conn.HTTP_OK) {
@@ -713,131 +715,3 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
     //endregion
 
 }
-
-
-// ctrl+'/' 로 주석해제 가능
-//package com.example.grad;
-//
-//import android.content.Intent;
-//import android.location.Address;
-//import android.location.Geocoder;
-//import android.os.Bundle;
-//import android.util.Log;
-//import android.view.View;
-//import android.widget.Button;
-//import android.widget.Toast;
-//
-//import androidx.appcompat.app.AppCompatActivity;
-//
-//import com.google.android.gms.maps.CameraUpdateFactory;
-//import com.google.android.gms.maps.GoogleMap;
-//import com.google.android.gms.maps.OnMapReadyCallback;
-//import com.google.android.gms.maps.SupportMapFragment;
-//import com.google.android.gms.maps.model.LatLng;
-//import com.google.android.gms.maps.model.MarkerOptions;
-//
-//import java.io.IOException;
-//import java.util.List;
-//
-//public class DriverCallCheckActivity extends AppCompatActivity implements OnMapReadyCallback {
-//    private Button btn_accept;
-//    private String no, addr, time;
-//    private GoogleMap mMap = null;
-//    private Geocoder geocoder = null;
-//
-//    //TODO: 여기서 수락하면 CALL의 STATUS가 1이된다.
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_driver_call_check);
-//
-//        btn_accept = findViewById(R.id.btn_accept);
-//        btn_accept.setOnClickListener(myOnClickListener);
-//
-//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map); // selectActivity.xml에 있는 fragment의 id를 통해 mapFragment를 찾아 연결
-//        mapFragment.getMapAsync(this); // getMapAsync가 호출되면 onMapReady 콜백이 실행됨.
-//
-//        Intent intent = getIntent();
-//        no = intent.getExtras().getString("no");
-//        addr = intent.getExtras().getString("addr");
-//        time = intent.getExtras().getString("time");
-//
-//
-//        Log.d("onCreate", "no : " + no);
-//        Log.d("onCreate", "addr : " + addr);
-//        Log.d("onCreate", "time : " + time);
-//    }
-//
-//    View.OnClickListener myOnClickListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//
-//           /* LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            RelativeLayout relativeLayout = (RelativeLayout) inflater.inflate(R.layout.layout_dialog, null);
-//            setContentView(relativeLayout);*/
-//
-//
-//  /*          LayoutInflater inflater = this.getLayoutInflater();
-//            View dialogView = inflater.inflate(R.layout.alert_label_editor, null);
-//            dialogBuilder.setView(dialogView);*/
-//
-//       /*     new MaterialDialog dialog = new MaterialDialog.Builder(this).customView(R.layout.layout_dialog_single_button, false).build();
-//            View view = dialog.getCustomView();*/
-//
-//      /*      Intent intent = new Intent(DriverCallCheckActivity.this, DriverWaitingActivity.class);
-//            startActivity(intent);
-//            finish();*/
-//        }
-//    };
-//
-//    @Override
-//    public void onMapReady(GoogleMap googleMap) {
-//        mMap = googleMap;
-//        geocoder = new Geocoder(this);
-//        createdMarker(addr);
-//
-//        mMap.setMyLocationEnabled(true);
-//        mMap.getUiSettings().setMyLocationButtonEnabled(true);
-//    }
-//
-//    public void createdMarker(String addr) {
-//
-//        List<Address> addressList = null;
-//
-//        try {
-//            addressList = geocoder.getFromLocationName(addr, 10); //주소, 최대검색결과개수
-//
-//            Log.i(this.getClass().getName(), addressList.get(0).toString());
-//
-//            // 콤마를 기준으로 split
-//            String[] splitStr = addressList.get(0).toString().split(",");
-//            String address = splitStr[0].substring(splitStr[0].indexOf("\"") + 1, splitStr[0].length() - 2); // 주소
-//            System.out.println(address);
-//
-//            String latitude = splitStr[10].substring(splitStr[10].indexOf("=") + 1); // 위도
-//            String longitude = splitStr[12].substring(splitStr[12].indexOf("=") + 1); // 경도
-//            System.out.println(latitude);
-//            System.out.println(longitude);
-//
-//            // 좌표(위도, 경도) 생성
-//            LatLng point = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
-//            // 마커 생성
-//            MarkerOptions mOptions = new MarkerOptions();
-//            mOptions.title("search result");
-//            mOptions.snippet(address);
-//            mOptions.position(point);
-//            // 마커 추가
-//            mMap.addMarker(mOptions);
-//
-//            // 해당 좌표로 화면 줌
-//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(point, 15));
-//
-//            Log.d("createdMarker", "latitude : " + latitude);
-//            Log.d("createdMarker", "longitude : " + longitude);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            Toast.makeText(DriverCallCheckActivity.this, "결과가 없습니다.", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-//}

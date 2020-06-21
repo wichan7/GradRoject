@@ -10,6 +10,8 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -35,6 +37,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -455,6 +458,8 @@ public class ShowPassengersLocationActivity extends AppCompatActivity implements
                                 ploc.position(new LatLng(slocLat, slocLong));
                                 ploc.title("승객의 위치");
                                 ploc.snippet("승객의 위치입니다.");
+                                Bitmap locImage1 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.passenger), 100, 100, false);
+                                ploc.icon(BitmapDescriptorFactory.fromBitmap(locImage1));
                                 passengerLocMarker = mMap.addMarker(ploc);
                                 // passenger Location Marker End
 
@@ -463,6 +468,8 @@ public class ShowPassengersLocationActivity extends AppCompatActivity implements
                                 pdest.position(new LatLng(sdestLat, sdestLong));
                                 pdest.title("승객의 목적지");
                                 pdest.snippet("승객의 목적지입니다.");
+                                Bitmap locImage2 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.destmarker), 170, 170, false);
+                                pdest.icon(BitmapDescriptorFactory.fromBitmap(locImage2));
                                 passengerDestMarker = mMap.addMarker(pdest);
                                 // passenger Destination Marker End
 

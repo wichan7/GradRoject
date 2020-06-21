@@ -163,7 +163,7 @@
                 android:layout_height="35dp"
                 android:layout_margin="1dp"
                 android:background="@color/windowBackground"
-                android:text="n분"
+                android:text="null"
                 android:textAlignment="center"
                 android:textSize="18sp" />
         </TableRow>

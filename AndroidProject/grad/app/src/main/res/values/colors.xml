@@ -12,8 +12,9 @@
     <color name="windowBackground">#f6f6f6</color>
     <color name="menu">#f2f2f2</color>
     <color name="colorGray">#dbdbdb</color>
-    <color name="colorSkyBlue">#05c7f5</color>
+    <color name="colorSkyBlue">#05C7F5</color>
     <color name="colorDarkBlue">#2057D6</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorDarkGreen">#00A00B</color>
 </resources>

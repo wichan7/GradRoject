@@ -139,7 +139,7 @@ public class DriverLoginActivity extends AppCompatActivity {
                             Toast.makeText(DriverLoginActivity.this, getString(R.string.success), Toast.LENGTH_SHORT).show();
                             String result2 = new CheckLicense().execute(loginid).get();
                             if (result2.equals("success")){
-                                Intent intent = new Intent(DriverLoginActivity.this, DriverCallListActivity.class);
+                                Intent intent = new Intent(DriverLoginActivity.this, DriverShortcutActivity.class);
                                 startActivity(intent);
                                 finish();
                             }else if (result2.equals("nullLicense")){

@@ -46,7 +46,7 @@ public class PassengerDriverInformActivity extends AppCompatActivity {
         tv_time = findViewById(R.id.tv_time);
 
         try {
-            String result = new GetDriverDataTask().execute(Integer.toString(cno)).get();          //일단 지금은 이름, 폰번호, 불린횟수, 평점만 &로 묶여서 들어옴
+            String result = new GetDriverDataTask().execute(Integer.toString(cno)).get();
 
             StringTokenizer st = new StringTokenizer(result, "&");
             while (st.hasMoreTokens()) {
@@ -55,18 +55,13 @@ public class PassengerDriverInformActivity extends AppCompatActivity {
                 tv_count.setText(st.nextToken());
                 tv_rating.setText(st.nextToken());
                 tv_car.setText(st.nextToken());
+                tv_time.setText(st.nextToken());
             }
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        //////////////////////////////////////
-        Intent intent = getIntent();
-        String time = intent.getExtras().getString("time");
-        Log.d("time_", "time : " + time);
-        tv_time.setText(time + "분");
-        //////////////////////////////////////
 
     }
 

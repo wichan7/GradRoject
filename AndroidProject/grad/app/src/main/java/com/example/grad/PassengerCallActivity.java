@@ -27,6 +27,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,6 +67,7 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
     private EditText et_search = null;
     private TextView tv_welcome = null;
     private Button btn_search = null, btn_call = null, btn_menu = null;
+    private CheckBox cb_isQuick = null;
     private Marker destMarker = null; //목적지마커는 항상 한개로 유지되어야하므로 destMarker로 관리
     private SharedPreferences pref;
 
@@ -107,6 +109,8 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
 
         btn_menu = findViewById(R.id.btn_menu);
         btn_menu.setOnClickListener(myOnClickListener);
+
+        cb_isQuick = findViewById(R.id.cb_isQuick);
 
         btn_search = findViewById(R.id.btn_search); //onClickListener는 onMapReady에서 달아줌
         et_search = findViewById(R.id.et_search);
@@ -500,9 +504,10 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
                     String slocLong = Double.toString(currentPosition.longitude);
                     String sdestLat = Double.toString(destMarker.getPosition().latitude);
                     String sdestLong = Double.toString(destMarker.getPosition().longitude);
+                    String isQuick = Boolean.toString(cb_isQuick.isChecked());
 
                     try {
-                        String result = new CustomTask().execute(id,slocString,slocLat,slocLong,sdestLat,sdestLong).get();
+                        String result = new CustomTask().execute(id,slocString,slocLat,slocLong,sdestLat,sdestLong,isQuick).get();
                         StringTokenizer st = new StringTokenizer(result, "&");
                         result = st.nextToken();
                         Log.i("PassengerCallActivity",result);
@@ -556,7 +561,8 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
                 conn.setRequestMethod("POST");
                 OutputStreamWriter osw = new OutputStreamWriter(conn.getOutputStream());
                 //URL연결, 출력스트림 초기화
-                sendMsg = "id=" + strings[0] + "&slocString=" + strings[1] + "&slocLat=" + strings[2] + "&slocLong=" + strings[3] + "&sdestLat=" + strings[4] + "&sdestLong=" + strings[5];
+                sendMsg = "id=" + strings[0] + "&slocString=" + strings[1] + "&slocLat=" + strings[2] + "&slocLong=" + strings[3] + "&sdestLat=" + strings[4]
+                        + "&sdestLong=" + strings[5] + "&isQuick=" + strings[6];
                 osw.write(sendMsg);
                 osw.flush();
                 if (conn.getResponseCode() == conn.HTTP_OK) {
