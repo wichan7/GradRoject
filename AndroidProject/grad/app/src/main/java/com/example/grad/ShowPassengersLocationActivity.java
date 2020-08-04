@@ -250,7 +250,7 @@ public class ShowPassengersLocationActivity extends AppCompatActivity implements
         }
 
         if (addresses == null || addresses.size() == 0) {
-            Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
             return "주소 미발견";
         } else {
             Address address = addresses.get(0);

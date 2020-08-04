@@ -48,6 +48,14 @@ public class PassengerLoginActivity extends AppCompatActivity {
 
     } // onCreate 끝
 
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(PassengerLoginActivity.this, FirstInstallActivity.class);
+        startActivity(intent);
+        overridePendingTransition(0, 0); //애니메이션 없에주는 코드
+        finish();
+    }
+
     class CustomTask extends AsyncTask<String, Void, String> {
         String sendMsg, receiveMsg;
 
@@ -102,6 +110,7 @@ public class PassengerLoginActivity extends AppCompatActivity {
                             Toast.makeText(PassengerLoginActivity.this, getString(R.string.success), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(PassengerLoginActivity.this, PassengerShortcutActivity.class);
                             startActivity(intent);
+                            overridePendingTransition(0, 0); //애니메이션 없에주는 코드
                             finish();
                         } else if (result.equals("pwdNotEquals")) {
                             Toast.makeText(PassengerLoginActivity.this, getString(R.string.pwdNotEquals), Toast.LENGTH_SHORT).show();
@@ -117,6 +126,7 @@ public class PassengerLoginActivity extends AppCompatActivity {
                 case R.id.btn_signIn: // 회원가입
                     Intent intent = new Intent(PassengerLoginActivity.this, PassengerJoinActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(0, 0); //애니메이션 없에주는 코드
                     finish();
                     break;
             }

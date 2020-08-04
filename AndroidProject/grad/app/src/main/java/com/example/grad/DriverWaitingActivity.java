@@ -27,16 +27,20 @@ import java.util.concurrent.ExecutionException;
 public class DriverWaitingActivity extends AppCompatActivity {
     private int cno;
     private int status;
-
+    private BackPressCloseHandler backPressCloseHandler;
     private Timer myTimer;                              // 5초마다 실행시키기 위해 Timer 선언
     private TimerTask myTimerTask;
     private Button btn_cancel;
 
     @Override
     protected void onDestroy(){
-
         super.onDestroy();
         myTimer.cancel();
+    }
+
+    @Override
+    public void onBackPressed(){
+        backPressCloseHandler.onBackPressed();
     }
 
     @Override
@@ -44,6 +48,7 @@ public class DriverWaitingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_waiting);
 
+        backPressCloseHandler = new BackPressCloseHandler(this);
         //cno 가져오는 코드
         Intent intent = getIntent();
         cno = intent.getExtras().getInt("cno");

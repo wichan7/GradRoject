@@ -47,6 +47,14 @@ public class DriverLoginActivity extends AppCompatActivity {
 
     } // onCreate 끝
 
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(DriverLoginActivity.this, FirstInstallActivity.class);
+        startActivity(intent);
+        overridePendingTransition(0, 0); //애니메이션 없에주는 코드
+        finish();
+    }
+
     class CustomTask extends AsyncTask<String, Void, String> {
         String sendMsg, receiveMsg;
 
@@ -141,10 +149,12 @@ public class DriverLoginActivity extends AppCompatActivity {
                             if (result2.equals("success")){
                                 Intent intent = new Intent(DriverLoginActivity.this, DriverShortcutActivity.class);
                                 startActivity(intent);
+                                overridePendingTransition(0, 0); //애니메이션 없에주는 코드
                                 finish();
                             }else if (result2.equals("nullLicense")){
                                 Intent intent = new Intent(DriverLoginActivity.this, DriverLicenseActivity.class);
                                 startActivity(intent);
+                                overridePendingTransition(0, 0); //애니메이션 없에주는 코드
                                 finish();
                             }
                         } else if (result.equals("pwdNotEquals")) {
@@ -161,6 +171,7 @@ public class DriverLoginActivity extends AppCompatActivity {
                 case R.id.btn_signIn: // 회원가입
                     Intent intent = new Intent(DriverLoginActivity.this, DriverJoinActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(0, 0); //애니메이션 없에주는 코드
                     finish();
                     break;
             }

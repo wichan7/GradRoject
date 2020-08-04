@@ -36,7 +36,7 @@ mHandler.postDelayed(new Runnable() {
 public class PassengerWaitingActivity extends AppCompatActivity {
     private int cno;
     private int status;
-
+    private BackPressCloseHandler backPressCloseHandler;
     private Timer myTimer;                              // 5초마다 실행시키기 위해 Timer 선언
     private TimerTask myTimerTask;
     private Button btn_cancel;
@@ -49,10 +49,16 @@ public class PassengerWaitingActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed(){
+        backPressCloseHandler.onBackPressed();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_waiting);
 
+        backPressCloseHandler = new BackPressCloseHandler(this);
         //cno 가져오는 코드
         Intent intent = getIntent();
         cno = intent.getExtras().getInt("cno");

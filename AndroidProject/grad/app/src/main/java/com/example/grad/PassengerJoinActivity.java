@@ -24,6 +24,14 @@ public class PassengerJoinActivity extends AppCompatActivity {
     Button btn_check, btn_submit;
     EditText et_id, et_pwd, et_repwd, et_name, et_middle, et_last;
     final String str_type = "passenger"; //driver클래스로 바꿀땐 이걸 driver로 변경해줘야함.
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(PassengerJoinActivity.this, PassengerLoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

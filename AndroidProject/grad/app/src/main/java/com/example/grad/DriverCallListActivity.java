@@ -42,12 +42,15 @@ public class DriverCallListActivity extends AppCompatActivity {
     private Timer myTimer;                              // 5초마다 실행시키기 위해 Timer 선언
     private TimerTask myTimerTask;
     private SharedPreferences pref;
-
+    private BackPressCloseHandler backPressCloseHandler;
     //메뉴버튼을 위한 멤버변수
     DrawerLayout drawerLayout;
     ConstraintLayout sideView;
     Button btn_menu;
+
+    //sidebar 변수
     TextView tv_welcome;
+    Button btn_exit;
 
     @Override
     protected void onPause() {
@@ -66,7 +69,7 @@ public class DriverCallListActivity extends AppCompatActivity {
         if (drawerLayout.isDrawerOpen(sideView)) {
             drawerLayout.closeDrawer(sideView);
         } else {
-            super.onBackPressed();
+            backPressCloseHandler.onBackPressed();
         }
     }
 
@@ -77,11 +80,14 @@ public class DriverCallListActivity extends AppCompatActivity {
         this.mContext = getApplicationContext();
         pref = getSharedPreferences(Gloval.PREFERENCE, MODE_PRIVATE);
 
+        backPressCloseHandler = new BackPressCloseHandler(this);
         drawerLayout = findViewById(R.id.dl_main);
         sideView = findViewById(R.id.sideView);
 
         btn_menu = findViewById(R.id.btn_menu);
         btn_menu.setOnClickListener(new MyOnClickListener());
+        btn_exit = findViewById(R.id.btn_exit);
+        btn_exit.setOnClickListener(new MyOnClickListener());
 
         tv_welcome = findViewById(R.id.tv_welcome);
         String id = pref.getString("id","");
@@ -158,6 +164,7 @@ public class DriverCallListActivity extends AppCompatActivity {
             intent.putExtra("addr", array_calls.get(position).addr);
             intent.putExtra("time", array_calls.get(position).time);
             startActivity(intent);
+            overridePendingTransition(0, 0); //애니메이션 없에주는 코드
             finish();
             /*
             String s = array_calls.get(position).no;
@@ -173,6 +180,11 @@ public class DriverCallListActivity extends AppCompatActivity {
             switch(v.getId()){
                 case R.id.btn_menu:
                     drawerLayout.openDrawer(GravityCompat.START);
+                    break;
+
+                case R.id.btn_exit:
+                    finishAffinity();
+                    System.exit(0);
                     break;
             }
         }

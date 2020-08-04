@@ -65,16 +65,17 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
     private GoogleMap mMap = null;
     private Geocoder geocoder = null;
     private EditText et_search = null;
-    private TextView tv_welcome = null;
     private Button btn_search = null, btn_call = null, btn_menu = null;
     private CheckBox cb_isQuick = null;
     private Marker destMarker = null; //목적지마커는 항상 한개로 유지되어야하므로 destMarker로 관리
     private SharedPreferences pref;
+    private BackPressCloseHandler backPressCloseHandler;
 
     //메뉴버튼을 위한 멤버변수
     DrawerLayout drawerLayout;
     ConstraintLayout sideView;
-
+    private TextView tv_welcome;
+    private Button btn_exit;
     //region GPS를 위한 변수선언부
 
     private Marker currentMarker = null;
@@ -100,6 +101,7 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
         setContentView(R.layout.activity_passenger_call);
         pref = getSharedPreferences(Gloval.PREFERENCE, MODE_PRIVATE);
 
+        backPressCloseHandler = new BackPressCloseHandler(this);
         tv_welcome = findViewById(R.id.tv_welcome);
         String id = pref.getString("id","");
         tv_welcome.setText(id+"님\n반갑습니다.");
@@ -109,9 +111,10 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
 
         btn_menu = findViewById(R.id.btn_menu);
         btn_menu.setOnClickListener(myOnClickListener);
+        btn_exit = findViewById(R.id.btn_exit);
+        btn_exit.setOnClickListener(myOnClickListener);
 
         cb_isQuick = findViewById(R.id.cb_isQuick);
-
         btn_search = findViewById(R.id.btn_search); //onClickListener는 onMapReady에서 달아줌
         et_search = findViewById(R.id.et_search);
 
@@ -199,8 +202,9 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
                 location = locationList.get(locationList.size() - 1); //location = locationList.get(0);
                 currentPosition = new LatLng(location.getLatitude(), location.getLongitude());
 
-                String markerTitle = getCurrentAddress(currentPosition);
-                String markerSnippet = "위도:" + String.valueOf(location.getLatitude()) + " 경도:" + String.valueOf(location.getLongitude());
+                //2020-08-03 주석처리. 마커 안만들어서 필요X
+                //String markerTitle = getCurrentAddress(currentPosition);
+                //String markerSnippet = "위도:" + String.valueOf(location.getLatitude()) + " 경도:" + String.valueOf(location.getLongitude());
 
                 //현재 위치에 마커 생성하고 이동
                 //setCurrentLocation(location, markerTitle, markerSnippet); 우리 프로그램에선 마커생성 필요 X
@@ -263,7 +267,7 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
         if (drawerLayout.isDrawerOpen(sideView)) {
             drawerLayout.closeDrawer(sideView);
         } else {
-            super.onBackPressed();
+            backPressCloseHandler.onBackPressed();
         }
     }
 
@@ -285,7 +289,8 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
         }
 
         if (addresses == null || addresses.size() == 0) {
-            Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
+            //2020-08-03 주석처리. 현재주소를 알필요없음
+            //Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
             return "주소 미발견";
         } else {
             Address address = addresses.get(0);
@@ -533,6 +538,9 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
 
                     break;
 
+                case R.id.btn_exit:
+                    finishAffinity();
+                    System.exit(0);
             }
         }
     }; //myOnClickListener 구현
