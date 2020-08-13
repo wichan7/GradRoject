@@ -7,26 +7,29 @@
     tools:context=".PassengerDriverInformActivity">
 
     <TableLayout
+        android:id="@+id/mytable"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:stretchColumns="1"
         app:layout_constraintBottom_toTopOf="@+id/btn_accept"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline11">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:background="@color/colorDarkBlue"
+            android:background="@color/facebookblue"
+            android:fontFamily="@font/nanumbarunpenb"
             android:gravity="center_vertical"
             android:text="기사 정보"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="30sp" />
+            android:textColor="@color/colorGray"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <TableRow
             android:layout_width="match_parent"
@@ -35,20 +38,22 @@
 
             <TextView
                 android:layout_height="35dp"
-                android:layout_margin="1dp"
+                android:layout_margin="3dp"
                 android:background="@color/windowBackground"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:text="기사명"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_height="35dp"
-                android:layout_margin="1dp"
+                android:layout_margin="3dp"
                 android:background="@color/windowBackground"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:text="null"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
         </TableRow>
 
         <TableRow
@@ -58,20 +63,22 @@
 
             <TextView
                 android:layout_height="35dp"
-                android:layout_margin="1dp"
+                android:layout_margin="3dp"
                 android:background="@color/windowBackground"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:text="전화번호"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/tv_phone"
                 android:layout_height="35dp"
-                android:layout_margin="1dp"
+                android:layout_margin="3dp"
                 android:background="@color/windowBackground"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:text="null"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
         </TableRow>
 
         <TableRow
@@ -81,20 +88,22 @@
 
             <TextView
                 android:layout_height="35dp"
-                android:layout_margin="1dp"
+                android:layout_margin="3dp"
                 android:background="@color/windowBackground"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:text="콜 횟수"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/tv_count"
                 android:layout_height="35dp"
-                android:layout_margin="1dp"
+                android:layout_margin="3dp"
                 android:background="@color/windowBackground"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:text="null"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
         </TableRow>
 
         <TableRow
@@ -104,20 +113,22 @@
 
             <TextView
                 android:layout_height="35dp"
-                android:layout_margin="1dp"
+                android:layout_margin="3dp"
                 android:background="@color/windowBackground"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:text="평균 별점"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/tv_rating"
                 android:layout_height="35dp"
-                android:layout_margin="1dp"
+                android:layout_margin="3dp"
                 android:background="@color/windowBackground"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:text="null"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
         </TableRow>
 
         <TableRow
@@ -127,20 +138,22 @@
 
             <TextView
                 android:layout_height="35dp"
-                android:layout_margin="1dp"
+                android:layout_margin="3dp"
                 android:background="@color/windowBackground"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:text="차량 번호"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/tv_car"
                 android:layout_height="35dp"
-                android:layout_margin="1dp"
+                android:layout_margin="3dp"
                 android:background="@color/windowBackground"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:text="null"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
         </TableRow>
 
         <TableRow
@@ -150,55 +163,61 @@
 
             <TextView
                 android:layout_height="35dp"
-                android:layout_margin="1dp"
+                android:layout_margin="3dp"
                 android:background="@color/windowBackground"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:paddingLeft="8dp"
                 android:paddingEnd="8dp"
                 android:text="예상 소요시간"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/tv_time"
                 android:layout_height="35dp"
-                android:layout_margin="1dp"
+                android:layout_margin="3dp"
                 android:background="@color/windowBackground"
+                android:fontFamily="@font/nanumbarunpenb"
                 android:text="null"
                 android:textAlignment="center"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
         </TableRow>
 
     </TableLayout>
 
     <Button
         android:id="@+id/btn_accept"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/border_layout"
-        android:backgroundTint="#F8F8F8"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/border_layout_for_blue_button"
+        android:fontFamily="@font/nanumbarunpenb"
         android:text="수 락"
-        android:textSize="20sp"
-        android:textColor="#473C3C"
+        android:textColor="@color/colorGray"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline17"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_refuse"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/border_layout"
-        android:backgroundTint="#F8F8F8"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/border_layout_for_gray_button"
+        android:fontFamily="@font/nanumbarunpenb"
         android:text="거 절"
-        android:textSize="20sp"
         android:textColor="#473C3C"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline17" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline11"
@@ -206,5 +225,26 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.3" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanumbarunpenb"
+        android:text="하이퀵 택시를 이용해주셔서 \n감사합니다."
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

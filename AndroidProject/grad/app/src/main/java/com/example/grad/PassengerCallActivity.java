@@ -23,9 +23,13 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -56,6 +60,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.StringTokenizer;
@@ -64,18 +69,23 @@ import java.util.concurrent.ExecutionException;
 public class PassengerCallActivity extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap = null;
     private Geocoder geocoder = null;
-    private EditText et_search = null;
     private Button btn_search = null, btn_call = null, btn_menu = null;
     private CheckBox cb_isQuick = null;
     private Marker destMarker = null; //목적지마커는 항상 한개로 유지되어야하므로 destMarker로 관리
     private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
     private BackPressCloseHandler backPressCloseHandler;
+
+    //EditText 자동완성을 위한 변수
+    private ArrayList<String> array_result;
+    private ArrayAdapter<String> autoAdapter;
+    private AutoCompleteTextView et_search = null;
 
     //메뉴버튼을 위한 멤버변수
     DrawerLayout drawerLayout;
     ConstraintLayout sideView;
     private TextView tv_welcome;
-    private Button btn_exit;
+    private Button btn_logout, btn_exit, btn_notice;
     //region GPS를 위한 변수선언부
 
     private Marker currentMarker = null;
@@ -95,35 +105,41 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
 
     //endregion
 
+    //onCreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_call);
         pref = getSharedPreferences(Gloval.PREFERENCE, MODE_PRIVATE);
+        editor = pref.edit();
 
         backPressCloseHandler = new BackPressCloseHandler(this);
         tv_welcome = findViewById(R.id.tv_welcome);
         String id = pref.getString("id","");
         tv_welcome.setText(id+"님\n반갑습니다.");
-
         drawerLayout = findViewById(R.id.dl_main);
         sideView = findViewById(R.id.sideView);
-
         btn_menu = findViewById(R.id.btn_menu);
         btn_menu.setOnClickListener(myOnClickListener);
+        btn_logout = findViewById(R.id.btn_logout);
+        btn_logout.setOnClickListener(myOnClickListener);
         btn_exit = findViewById(R.id.btn_exit);
         btn_exit.setOnClickListener(myOnClickListener);
-
+        btn_notice = findViewById(R.id.btn_notice);
+        btn_notice.setOnClickListener(myOnClickListener);
         cb_isQuick = findViewById(R.id.cb_isQuick);
         btn_search = findViewById(R.id.btn_search); //onClickListener는 onMapReady에서 달아줌
-        et_search = findViewById(R.id.et_search);
-
         btn_call = findViewById(R.id.btn_call);
         btn_call.setOnClickListener(myOnClickListener);
+        et_search = (AutoCompleteTextView)findViewById(R.id.et_search);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map); // selectActivity.xml에 있는 fragment의 id를 통해 mapFragment를 찾아 연결
         mapFragment.getMapAsync(this); // getMapAsync가 호출되면 onMapReady 콜백이 실행됨.
 
+        array_result = Gloval.getStringArrayPref(this,"array_result");
+        autoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line , array_result);
+        et_search.setAdapter(autoAdapter);
+        //et_search에 자동완성 기능 달기
 
         //region GPS를 위한 코드
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -141,7 +157,7 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         //endregion
-    }
+    } //onCreate 끝
 
     @Override
     public void onMapReady(final GoogleMap googleMap) { //googlemap이 작동완료했을때 실행되는 콜백함수
@@ -260,6 +276,7 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
         if (mFusedLocationClient != null) {
             mFusedLocationClient.removeLocationUpdates(locationCallback);
         }
+        Gloval.setStringArrayPref(this,"array_result", array_result);
     }
 
     @Override
@@ -291,7 +308,7 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
         if (addresses == null || addresses.size() == 0) {
             //2020-08-03 주석처리. 현재주소를 알필요없음
             //Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
-            return "주소 미발견";
+            return "---";
         } else {
             Address address = addresses.get(0);
             return address.getAddressLine(0).toString();
@@ -469,8 +486,12 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
                     List<Address> addressList = null;
 
                     try {
-                        addressList = geocoder.getFromLocationName(str,10); //주소, 최대검색결과개수
-
+                        addressList = geocoder.getFromLocationName(str,1); //주소, 최대검색결과개수
+                        Toast.makeText(PassengerCallActivity.this,addressList.toString(),Toast.LENGTH_LONG);
+                        if(addressList.size() == 0){
+                            Toast.makeText(PassengerCallActivity.this,"검색 결과가 없습니다.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         Log.i(this.getClass().getName(),addressList.get(0).toString());
 
                         // 콤마를 기준으로 split
@@ -484,16 +505,59 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
                         System.out.println(longitude);
 
                         // 좌표(위도, 경도) 생성
+                        System.out.println("lat:"+latitude+" long:"+longitude);
                         LatLng point = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
                         // 마커 추가
                         setDestMarker(point);
                         // 해당 좌표로 화면 줌
-                        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(point,mMap.getCameraPosition().zoom));
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(point,mMap.getCameraPosition().zoom));
 
+                        if(array_result.size()==0){
+                            autoAdapter.add(str);
+                            array_result.add(str);
+                        }else{
+                            for(int i=0; i<array_result.size(); i++){
+                                if(array_result.get(i).equals(str))
+                                    break;
+                                if(i == array_result.size()-1) {
+                                    autoAdapter.add(str);
+                                    array_result.add(str);
+                                }
+                            }
+                        }
+
+                        /* 주소가 기록되는 기능
+                        StringTokenizer st = new StringTokenizer(address, " ");
+                        String tstr = "";
+                        st.nextToken();
+                        st.nextToken(); // 국가, 시까지 제거
+                        for(;;){
+                            if (st.hasMoreTokens()){
+                                tstr += st.nextToken() + " ";
+                            }
+                            else break;
+                        }
+                        tstr = tstr.substring(0,tstr.length()-1); //마지막에 공백 생기므로 공백 제거
+                        address = tstr;
+                        if(array_result.size()==0){
+                            autoAdapter.add(address);
+                            array_result.add(address);
+                        }else{
+                            for(int i=0; i<array_result.size(); i++){
+                                Log.i("zz",array_result.get(i));
+                                if(array_result.get(i).equals(address))
+                                    break;
+                                if(i == array_result.size()-1) {
+                                    autoAdapter.add(address);
+                                    array_result.add(address);
+                                }
+                            }
+                        }
+                        //array_result에 저장.
+                        */
                     } catch (IOException e) {
                         e.printStackTrace();
-                        Toast.makeText(PassengerCallActivity.this, "결과가 없습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PassengerCallActivity.this, "검색 결과가 없습니다.", Toast.LENGTH_SHORT).show();
                     }
 
                     break;
@@ -541,6 +605,21 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
                 case R.id.btn_exit:
                     finishAffinity();
                     System.exit(0);
+                    break;
+
+                case R.id.btn_logout:
+                    editor.putInt("autoLoginValue", Gloval.NEGATIVE);
+                    editor.commit();
+                    Intent intent = new Intent(PassengerCallActivity.this,FirstInstallActivity.class);
+                    finish();
+                    break;
+
+                case R.id.btn_notice:
+                    Intent intent2 = new Intent(PassengerCallActivity.this,NoticeActivity.class);
+                    startActivity(intent2);
+                    overridePendingTransition(0, 0); //애니메이션 없에주는 코드
+                    finish();
+                    break;
             }
         }
     }; //myOnClickListener 구현
@@ -628,4 +707,5 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
         }
         destMarker.setDraggable(true);
     }
+
 }

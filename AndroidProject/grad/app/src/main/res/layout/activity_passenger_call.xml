@@ -20,8 +20,10 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
             tools:context=".MapsActivity" />
 
         <Button
@@ -35,7 +37,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/et_search"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -43,28 +45,28 @@
             android:layout_marginEnd="8dp"
             android:background="@drawable/border_layout"
             android:backgroundTint="#F8F8F8"
-            android:ems="10"
+            android:completionThreshold="1"
             android:gravity="center"
+            android:hint="면목동 서일대학교"
             android:inputType="text"
             app:layout_constraintBottom_toBottomOf="@+id/btn_search"
             app:layout_constraintEnd_toStartOf="@+id/btn_search"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_menu"
             app:layout_constraintTop_toTopOf="@+id/btn_search" />
 
         <Button
             android:id="@+id/btn_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/border_layout"
-            android:backgroundTint="#F8F8F8"
+            android:background="@drawable/border_layout_for_gray_button"
             android:text="검색"
             android:textColor="#473C3C"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/btn_call"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btn_call"
@@ -73,8 +75,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/border_layout"
-            android:backgroundTint="#F8F8F8"
+            android:background="@drawable/border_layout_for_gray_button"
             android:text="기사 부르기"
             android:textColor="#473C3C"
             android:textSize="20sp"
@@ -88,11 +89,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/border_layout"
+            android:background="@drawable/border_layout_for_gray_button"
             android:text=" 퀵으로 부르기  "
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/et_search"
-            app:layout_constraintStart_toStartOf="@+id/et_search" />
+            app:layout_constraintBottom_toTopOf="@+id/btn_call"
+            app:layout_constraintStart_toStartOf="@+id/btn_call" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -105,11 +106,11 @@
         android:background="@drawable/menugradient">
 
         <Button
-            android:id="@+id/btn_modify"
+            android:id="@+id/btn_notice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_layout"
-            android:text="개인정보 수정"
+            android:background="@drawable/border_layout_for_gray_button"
+            android:text="공지사항"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/guideline12" />
@@ -118,17 +119,27 @@
             android:id="@+id/btn_history"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_layout"
+            android:background="@drawable/border_layout_for_gray_button"
             android:text="콜 내역 보기"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_modify" />
+            app:layout_constraintTop_toBottomOf="@id/btn_notice" />
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="로그아웃"
+            android:background="@drawable/border_layout_for_gray_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btn_exit"/>
 
         <Button
             android:id="@+id/btn_exit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_layout"
+            android:background="@drawable/border_layout_for_gray_button"
             android:text="종료하기"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

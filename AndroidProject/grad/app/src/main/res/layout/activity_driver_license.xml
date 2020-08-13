@@ -146,7 +146,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/border_layout"
         android:backgroundTint="@color/colorWhite"
-        android:text="면허인증없이 진행(디버그용)"
+        android:text="면허인증없이 진행(테스트용)"
         android:textColor="@color/colorBlack"
         app:layout_constraintBottom_toTopOf="@+id/btn_submit"
         app:layout_constraintEnd_toEndOf="@+id/btn_submit"

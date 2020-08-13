@@ -22,7 +22,7 @@
         android:id="@+id/et_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="48dp"
         android:ems="10"
         android:hint="사용하실 id를 입력하세요."
@@ -84,7 +84,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_pwd" />
 
     <TextView
-        android:id="@+id/tv_carNum"
+        android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -104,7 +104,6 @@
         android:hint="이름을 입력하세요."
         android:inputType="textPersonName"
         android:textColor="#000000"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/et_repwd"
         app:layout_constraintStart_toStartOf="@+id/et_repwd"
         app:layout_constraintTop_toBottomOf="@+id/et_repwd" />
@@ -128,10 +127,10 @@
         android:layout_marginStart="16dp"
         android:ems="10"
         android:inputType="number"
+        android:maxLength="4"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:maxLength="4"
         app:layout_constraintBottom_toBottomOf="@+id/tv_time"
         app:layout_constraintStart_toEndOf="@+id/tv_time"
         app:layout_constraintTop_toTopOf="@+id/tv_time" />
@@ -143,10 +142,10 @@
         android:layout_marginStart="16dp"
         android:ems="10"
         android:inputType="number"
+        android:maxLength="4"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:maxLength="4"
         app:layout_constraintBottom_toBottomOf="@+id/et_middle"
         app:layout_constraintStart_toEndOf="@+id/et_middle"
         app:layout_constraintTop_toTopOf="@+id/et_middle" />
@@ -167,5 +166,61 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/et_authcode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="number"
+        android:maxLength="6"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/et_middle"
+        app:layout_constraintStart_toStartOf="@+id/tv_time"
+        app:layout_constraintTop_toBottomOf="@+id/et_middle" />
+
+    <Button
+        android:id="@+id/btn_auth"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:backgroundTint="#3362ab"
+        android:text="인증번호 받기"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/btn_check"
+        app:layout_constraintTop_toBottomOf="@+id/et_last" />
+
+    <TextView
+        android:id="@+id/tv_information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="해당 휴대폰 번호로\n인증번호를 전송했습니다."
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/btn_authconfirm"
+        app:layout_constraintStart_toStartOf="@+id/et_authcode"
+        app:layout_constraintTop_toBottomOf="@+id/et_authcode" />
+
+    <Button
+        android:id="@+id/btn_authconfirm"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/facebookblue"
+        android:text="인증"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/et_authcode"
+        app:layout_constraintEnd_toEndOf="@+id/et_last"
+        app:layout_constraintStart_toEndOf="@+id/et_authcode"
+        app:layout_constraintTop_toTopOf="@+id/et_authcode" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

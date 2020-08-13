@@ -42,6 +42,7 @@ public class DriverCallListActivity extends AppCompatActivity {
     private Timer myTimer;                              // 5초마다 실행시키기 위해 Timer 선언
     private TimerTask myTimerTask;
     private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
     private BackPressCloseHandler backPressCloseHandler;
     //메뉴버튼을 위한 멤버변수
     DrawerLayout drawerLayout;
@@ -50,7 +51,7 @@ public class DriverCallListActivity extends AppCompatActivity {
 
     //sidebar 변수
     TextView tv_welcome;
-    Button btn_exit;
+    Button btn_logout, btn_exit, btn_notice;
 
     @Override
     protected void onPause() {
@@ -79,6 +80,7 @@ public class DriverCallListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_driver_call_list);
         this.mContext = getApplicationContext();
         pref = getSharedPreferences(Gloval.PREFERENCE, MODE_PRIVATE);
+        editor = pref.edit();
 
         backPressCloseHandler = new BackPressCloseHandler(this);
         drawerLayout = findViewById(R.id.dl_main);
@@ -86,8 +88,13 @@ public class DriverCallListActivity extends AppCompatActivity {
 
         btn_menu = findViewById(R.id.btn_menu);
         btn_menu.setOnClickListener(new MyOnClickListener());
+
+        btn_logout = findViewById(R.id.btn_logout);
+        btn_logout.setOnClickListener(new MyOnClickListener());
         btn_exit = findViewById(R.id.btn_exit);
         btn_exit.setOnClickListener(new MyOnClickListener());
+        btn_notice = findViewById(R.id.btn_notice);
+        btn_notice.setOnClickListener(new MyOnClickListener());
 
         tv_welcome = findViewById(R.id.tv_welcome);
         String id = pref.getString("id","");
@@ -105,6 +112,7 @@ public class DriverCallListActivity extends AppCompatActivity {
 
         myTimer = new Timer();
         myTimerTask = new MyTimerTask();
+
     }//onCreate 끝
 
     protected void setListOnOff(boolean flag) {
@@ -181,10 +189,21 @@ public class DriverCallListActivity extends AppCompatActivity {
                 case R.id.btn_menu:
                     drawerLayout.openDrawer(GravityCompat.START);
                     break;
-
+                case R.id.btn_logout:
+                    editor.putInt("autoLoginValue", Gloval.NEGATIVE);
+                    editor.commit();
+                    Intent intent = new Intent(DriverCallListActivity.this,FirstInstallActivity.class);
+                    finish();
+                    break;
                 case R.id.btn_exit:
                     finishAffinity();
                     System.exit(0);
+                    break;
+                case R.id.btn_notice:
+                    Intent intent2 = new Intent(DriverCallListActivity.this,NoticeActivity.class);
+                    startActivity(intent2);
+                    overridePendingTransition(0, 0); //애니메이션 없에주는 코드
+                    finish();
                     break;
             }
         }

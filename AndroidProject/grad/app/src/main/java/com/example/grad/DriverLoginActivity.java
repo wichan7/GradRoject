@@ -143,6 +143,7 @@ public class DriverLoginActivity extends AppCompatActivity {
                         String result = new CustomTask().execute(loginid, loginpwd, str_type).get();
                         if (result.equals("success")) {
                             editor.putString("id",loginid);
+                            editor.putInt("autoLoginValue", Gloval.DRIVER);
                             editor.commit();
                             Toast.makeText(DriverLoginActivity.this, getString(R.string.success), Toast.LENGTH_SHORT).show();
                             String result2 = new CheckLicense().execute(loginid).get();

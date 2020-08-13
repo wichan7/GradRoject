@@ -75,31 +75,41 @@
         android:background="@drawable/menugradient">
 
         <Button
-            android:id="@+id/btn_modify"
+            android:id="@+id/btn_notice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="개인정보 수정"
-            android:background="@drawable/border_layout"
-            app:layout_constraintTop_toTopOf="@id/guideline12"
+            android:background="@drawable/border_layout_for_gray_button"
+            android:text="공지사항"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="@id/guideline12" />
 
         <Button
             android:id="@+id/btn_history"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="콜 내역 보기"
-            android:background="@drawable/border_layout"
-            app:layout_constraintTop_toBottomOf="@id/btn_modify"
+            android:background="@drawable/border_layout_for_gray_button"
+            app:layout_constraintTop_toBottomOf="@id/btn_notice"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="로그아웃"
+            android:background="@drawable/border_layout_for_gray_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btn_exit"/>
 
         <Button
             android:id="@+id/btn_exit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="종료하기"
-            android:background="@drawable/border_layout"
+            android:background="@drawable/border_layout_for_gray_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>

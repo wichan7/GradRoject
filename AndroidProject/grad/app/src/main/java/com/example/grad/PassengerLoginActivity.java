@@ -106,6 +106,7 @@ public class PassengerLoginActivity extends AppCompatActivity {
                         String result = new CustomTask().execute(loginid, loginpwd, str_type).get();
                         if (result.equals("success")) {
                             editor.putString("id",loginid);
+                            editor.putInt("autoLoginValue", Gloval.PASSENGER);
                             editor.commit();
                             Toast.makeText(PassengerLoginActivity.this, getString(R.string.success), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(PassengerLoginActivity.this, PassengerShortcutActivity.class);

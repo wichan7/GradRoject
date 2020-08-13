@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,6 +42,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.snackbar.Snackbar;
@@ -59,9 +61,12 @@ import java.util.concurrent.ExecutionException;
 
 public class DriverCallCheckActivity extends AppCompatActivity implements OnMapReadyCallback {
     private Button btn_accept = null;               // 수락 버튼
+    private TextView tv_dest;
     private LatLng sLoc, sDest;                      // 승객 위치와 승객 목적지를 담을 변수
     private String cno;                               // 전 intent에서 넘어온 callnumber
+    private String addr;                              // 전 intent에서 넘어온 address값.
     private int need_time;                          // 소요시간 값 넘겨줌
+    private BackPressCloseHandler backPressCloseHandler;
 
     //region GPS를 위한 변수선언부
     private GoogleMap mMap = null;
@@ -87,8 +92,12 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_call_check);
 
+        backPressCloseHandler = new BackPressCloseHandler(this);
         btn_accept = findViewById(R.id.btn_accept);      // OnClickListener는 onMapReady에서 달아줌.
         cno = getIntent().getStringExtra("no");     // 전 인텐트에서 넘어온 call_no를 받음
+        addr = getIntent().getStringExtra("addr");
+        tv_dest = findViewById(R.id.tv_dest);
+        tv_dest.setText(addr);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map); // selectActivity.xml에 있는 fragment의 id를 통해 mapFragment를 찾아 연결
         mapFragment.getMapAsync(this); // getMapAsync가 호출되면 onMapReady 콜백이 실행됨.
@@ -109,6 +118,13 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         //endregion
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(DriverCallCheckActivity.this, DriverCallListActivity.class);
+        startActivity(intent);
+        overridePendingTransition(0, 0); //애니메이션 없에주는 코드
     }
 
     @Override
@@ -217,8 +233,18 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
             Intent intent = new Intent(DriverCallCheckActivity.this, PassengerDriverInformActivity.class);
             intent.putExtra("time" , time);
             //////////////////////////////////////////////////////////////////////////////////////////////////
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(Mid_loc, getZoomLevel(mid_distance));
-            mMap.moveCamera(cameraUpdate);
+            // 2020. 08. 04 강위찬: 밑에 코드 주석으로 변경.
+            // CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(Mid_loc, getZoomLevel(mid_distance));
+            //////////////////////////////////////////////////////////////////////////////////////////////////
+            //아래 코드로 변경//
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            builder.include(sdestMarker.getPosition());
+            builder.include(slocMarker.getPosition());
+            LatLngBounds bounds = builder.build();
+            int padding = 200;
+            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+            mMap.moveCamera(cu);
+            //변경 끝. 2020. 08. 04 강위찬
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -436,7 +462,7 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
         }
 
         if (addresses == null || addresses.size() == 0) {
-            Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
             return "주소 미발견";
         } else {
             Address address = addresses.get(0);

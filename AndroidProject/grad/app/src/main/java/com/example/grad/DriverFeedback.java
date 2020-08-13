@@ -66,12 +66,14 @@ public class DriverFeedback extends AppCompatActivity {
                     Toast.makeText(DriverFeedback.this, "감사합니다.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(DriverFeedback.this, PassengerCallActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(0, 0); //애니메이션 없에주는 코드
                     finish();
                  break;
                 case R.id.btn_cancel :
                     Toast.makeText(DriverFeedback.this, "취소하였습니다.", Toast.LENGTH_SHORT).show();
                     Intent intent1 = new Intent(DriverFeedback.this, PassengerCallActivity.class);
                     startActivity(intent1);
+                    overridePendingTransition(0, 0); //애니메이션 없에주는 코드
                     finish();
             }
         }

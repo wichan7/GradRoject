@@ -23,6 +23,7 @@ import java.util.concurrent.ExecutionException;
 
 public class PassengerDriverInformActivity extends AppCompatActivity {
     private int cno;
+    private BackPressCloseHandler backPressCloseHandler;
 
     Button btn_accept, btn_refuse;
     TextView tv_name, tv_phone, tv_count, tv_rating, tv_car, tv_time;
@@ -32,6 +33,7 @@ public class PassengerDriverInformActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_driver_inform);
 
+        backPressCloseHandler = new BackPressCloseHandler(this);
         cno = getIntent().getExtras().getInt("cno");
         btn_accept = findViewById(R.id.btn_accept);
         btn_refuse = findViewById(R.id.btn_refuse);
@@ -63,6 +65,11 @@ public class PassengerDriverInformActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void onBackPressed(){
+        backPressCloseHandler.onBackPressed();
     }
 
     //region DB연동코드
