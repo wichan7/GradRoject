@@ -173,7 +173,7 @@ public class DriverCallCheckActivity extends AppCompatActivity implements OnMapR
         // DB에서 Location을 받아 마커를 생성하는 부분
         try {
             String result = new GetLocDataTask().execute(cno).get();
-            Log.i("db결과", result);
+            //&으로 값이 묶여서 들어옴.
             StringTokenizer st = new StringTokenizer(result, "&");
             String slocLat = st.nextToken();
             String slocLong = st.nextToken();

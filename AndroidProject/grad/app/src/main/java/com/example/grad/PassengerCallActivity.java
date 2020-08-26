@@ -136,10 +136,11 @@ public class PassengerCallActivity extends AppCompatActivity implements OnMapRea
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map); // selectActivity.xml에 있는 fragment의 id를 통해 mapFragment를 찾아 연결
         mapFragment.getMapAsync(this); // getMapAsync가 호출되면 onMapReady 콜백이 실행됨.
 
+        //자동완성을 위한 코드
         array_result = Gloval.getStringArrayPref(this,"array_result");
         autoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line , array_result);
         et_search.setAdapter(autoAdapter);
-        //et_search에 자동완성 기능 달기
+        //et_search 자동완성 끝
 
         //region GPS를 위한 코드
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

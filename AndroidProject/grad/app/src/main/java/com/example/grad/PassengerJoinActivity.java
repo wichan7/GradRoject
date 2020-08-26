@@ -80,6 +80,9 @@ public class PassengerJoinActivity extends AppCompatActivity {
                         else if (result.equals("idExist")){
                             Toast.makeText(PassengerJoinActivity.this, getString(R.string.idExist), Toast.LENGTH_SHORT).show();
                         }
+                        else if (result.equals("idVal")){
+                            Toast.makeText(PassengerJoinActivity.this, getString(R.string.idVal), Toast.LENGTH_SHORT).show();
+                        }
                     } catch (Exception e){ }
                     break;
                     // 아이디 확인 버튼일경우 end
